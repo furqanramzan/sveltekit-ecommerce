@@ -1,0 +1,49 @@
+{
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "nx-cloud",
+      "options": {
+        "cacheableOperations": ["prepare", "typecheck", "build", "lint"],
+        "accessToken": "OWU4OGMyOGMtN2YyNC00MzZkLWI0YTctMTFkNGVlOGUyOWM0fHJlYWQtd3JpdGU="
+      }
+    },
+    "local": {
+      "runner": "nx/tasks-runners/default",
+      "options": {
+        "cacheableOperations": ["prepare", "typecheck", "build", "lint"]
+      }
+    }
+  },
+  "targetDefaults": {
+    "prepare": {
+      "inputs": ["production", "^production"]
+    },
+    "dev": {
+      "dependsOn": ["prepare"]
+    },
+    "build": {
+      "dependsOn": ["prepare", "^build"],
+      "inputs": ["production", "^production"]
+    },
+    "preview": {
+      "dependsOn": ["build"]
+    },
+    "typecheck": {
+      "dependsOn": ["prepare", "^typecheck"],
+      "inputs": ["code", "^production"]
+    },
+    "lint": {
+      "inputs": ["lint"]
+    }
+  },
+  "namedInputs": {
+    "sharedGlobals": [],
+    "default": ["{projectRoot}/**/*", "sharedGlobals"],
+    "production": ["default", "!{projectRoot}/.eslintrc.json", "!{projectRoot}/**/*.md"],
+    "code": ["default", "!{projectRoot}/**/*.md"],
+    "lint": ["code", "{workspaceRoot}/.eslintrc.json", "{workspaceRoot}/.eslintignore"]
+  },
+  "affected": {
+    "defaultBase": "main"
+  }
+}
