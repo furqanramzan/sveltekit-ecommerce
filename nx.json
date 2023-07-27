@@ -3,14 +3,14 @@
     "default": {
       "runner": "nx-cloud",
       "options": {
-        "cacheableOperations": ["fmt", "prepare", "typecheck", "build", "lint"],
+        "cacheableOperations": ["fmt", "prepare", "typecheck", "build", "lint", "migration"],
         "accessToken": "OWU4OGMyOGMtN2YyNC00MzZkLWI0YTctMTFkNGVlOGUyOWM0fHJlYWQtd3JpdGU="
       }
     },
     "local": {
       "runner": "nx/tasks-runners/default",
       "options": {
-        "cacheableOperations": ["fmt", "prepare", "typecheck", "build", "lint"]
+        "cacheableOperations": ["fmt", "prepare", "typecheck", "build", "lint", "migration"]
       }
     }
   },

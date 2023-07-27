@@ -7,13 +7,14 @@
     "pnpm": ">=8"
   },
   "scripts": {
-    "dev": "vite dev",
-    "preview": "vite preview",
+    "dev": "nx exec -- vite dev",
+    "preview": "nx exec -- vite preview",
     "build": "nx exec -- vite build",
     "prepare": "nx exec --  svelte-kit sync",
     "typecheck": "nx exec -- svelte-check --tsconfig ./tsconfig.json",
     "lint": "nx exec -- eslint .",
-    "fmt": "nx exec -- prettier --write ."
+    "fmt": "nx exec -- prettier --write .",
+    "migration": "nx exec -- drizzle-kit generate:mysql --schema=./src/lib/server/database/schema.ts --out=./.migrations"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.39.8",
@@ -24,12 +25,15 @@
     "@typescript-eslint/eslint-plugin": "^6.2.0",
     "@typescript-eslint/parser": "^6.2.0",
     "autoprefixer": "^10.4.14",
+    "drizzle-kit": "^0.19.12",
+    "drizzle-orm": "^0.27.2",
     "eslint": "^8.45.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^5.0.0",
     "eslint-plugin-svelte": "^2.32.4",
     "flowbite": "^1.7.0",
     "flowbite-svelte": "^0.40.2",
+    "mysql2": "^3.5.2",
     "nx": "16.5.5",
     "nx-cloud": "latest",
     "postcss": "^8.4.27",
@@ -39,9 +43,11 @@
     "svelte-check": "^3.4.6",
     "tailwind-merge": "^1.14.0",
     "tailwindcss": "^3.3.3",
+    "text-case": "^1.0.9",
     "tslib": "^2.6.1",
     "typescript": "^5.1.6",
-    "vite": "^4.4.7"
+    "vite": "^4.4.7",
+    "zod": "^3.21.4"
   },
   "nx": {
     "targets": {
@@ -53,6 +59,14 @@
       "check": {
         "outputs": [
           "{projectRoot}/.svelte-kit"
+        ]
+      },
+      "migration": {
+        "inputs": [
+          "{projectRoot}/src/lib/server/database/schema.ts"
+        ],
+        "outputs": [
+          "{projectRoot}/.migrations"
         ]
       }
     }
