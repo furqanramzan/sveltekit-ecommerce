@@ -1,5 +1,4 @@
 import { env } from 'node:process';
-import { snakeCase } from 'text-case';
 import { mysqlTableCreator as drizzleMysqlTableCreator } from 'drizzle-orm/mysql-core';
 import { z } from 'zod';
 import { createConnection } from 'mysql2';
@@ -34,12 +33,12 @@ export async function mysqlConnection<T extends Record<string, unknown>>(schema?
 }
 
 export function mysqlTableCreator() {
-  const { PUBLIC_APP_NAME } = z
+  const { DATABASE_TABLE_PREFIX } = z
     .object({
-      PUBLIC_APP_NAME: z.string(),
+      DATABASE_TABLE_PREFIX: z.string(),
     })
     .parse(env);
-  return drizzleMysqlTableCreator((name) => `${snakeCase(PUBLIC_APP_NAME)}_${name}`);
+  return drizzleMysqlTableCreator((name) => `${DATABASE_TABLE_PREFIX}_${name}`);
 }
 
 function getConstants() {
