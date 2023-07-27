@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+# Exit When Any Command Fails
+set -e
+
+echo "-----------------------------"
+echo "| Running Lint Checking |"
+echo "-----------------------------"
+sh -c "pnpm nx affected --target=lint"
+
+echo "-----------------------------"
+echo "| Running Type Checking |"
+echo "-----------------------------"
+sh -c "pnpm nx affected --target=typecheck"
+
+echo "-----------------------------"
+echo "| Running Build |"
+echo "-----------------------------"
+sh -c "pnpm nx affected --target=build"
