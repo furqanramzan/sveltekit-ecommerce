@@ -1,2 +1,7 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script lang="ts">
+  import '$lib/css/app.css';
+</script>
+
+<div class="flex h-screen flex-col items-center justify-center gap-y-5">
+  <h1 class="text-3xl font-bold underline">Welcome to SvelteKit E-Commerce</h1>
+</div>
