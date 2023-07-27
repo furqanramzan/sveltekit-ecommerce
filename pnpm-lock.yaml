@@ -17,6 +17,9 @@ devDependencies:
   '@sveltejs/kit':
     specifier: ^1.22.3
     version: 1.22.3(svelte@4.1.1)(vite@4.4.7)
+  '@types/node':
+    specifier: ^18.17.1
+    version: 18.17.1
   '@typescript-eslint/eslint-plugin':
     specifier: ^6.2.0
     version: 6.2.0(@typescript-eslint/parser@6.2.0)(eslint@8.45.0)(typescript@5.1.6)
@@ -79,7 +82,7 @@ devDependencies:
     version: 5.1.6
   vite:
     specifier: ^4.4.7
-    version: 4.4.7
+    version: 4.4.7(@types/node@18.17.1)
 
 packages:
 
@@ -707,7 +710,7 @@ packages:
       sirv: 2.0.3
       svelte: 4.1.1
       undici: 5.22.1
-      vite: 4.4.7
+      vite: 4.4.7(@types/node@18.17.1)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -723,7 +726,7 @@ packages:
       '@sveltejs/vite-plugin-svelte': 2.4.3(svelte@4.1.1)(vite@4.4.7)
       debug: 4.3.4
       svelte: 4.1.1
-      vite: 4.4.7
+      vite: 4.4.7(@types/node@18.17.1)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -742,7 +745,7 @@ packages:
       magic-string: 0.30.1
       svelte: 4.1.1
       svelte-hmr: 0.15.2(svelte@4.1.1)
-      vite: 4.4.7
+      vite: 4.4.7(@types/node@18.17.1)
       vitefu: 0.2.4(vite@4.4.7)
     transitivePeerDependencies:
       - supports-color
@@ -764,6 +767,10 @@ packages:
     resolution: {integrity: sha512-DT+iNIRNX884cx0/Q1ja7NyUPpZuv0KPyL5rGNxm1WC1OtHstl7n4Jb7nk+xacNShQMbczJjt8uFzznpp6kYBg==}
     dependencies:
       '@types/unist': 2.0.7
+    dev: true
+
+  /@types/node@18.17.1:
+    resolution: {integrity: sha512-xlR1jahfizdplZYRU59JlUx9uzF1ARa8jbhM11ccpCJya8kvos5jwdm2ZAgxSCwOl0fq21svP18EVwPBXMQudw==}
     dev: true
 
   /@types/normalize-package-data@2.4.1:
@@ -4041,7 +4048,7 @@ packages:
       spdx-expression-parse: 3.0.1
     dev: true
 
-  /vite@4.4.7:
+  /vite@4.4.7(@types/node@18.17.1):
     resolution: {integrity: sha512-6pYf9QJ1mHylfVh39HpuSfMPojPSKVxZvnclX1K1FyZ1PXDOcLBibdq5t1qxJSnL63ca8Wf4zts6mD8u8oc9Fw==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
@@ -4069,6 +4076,7 @@ packages:
       terser:
         optional: true
     dependencies:
+      '@types/node': 18.17.1
       esbuild: 0.18.17
       postcss: 8.4.27
       rollup: 3.26.3
@@ -4084,7 +4092,7 @@ packages:
       vite:
         optional: true
     dependencies:
-      vite: 4.4.7
+      vite: 4.4.7(@types/node@18.17.1)
     dev: true
 
   /vue-eslint-parser@9.3.1(eslint@8.45.0):

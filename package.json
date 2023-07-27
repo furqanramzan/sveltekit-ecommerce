@@ -2,6 +2,10 @@
   "name": "sveltekit-ecommerce",
   "type": "module",
   "version": "0.0.1",
+  "engines": {
+    "node": ">=18",
+    "pnpm": ">=8"
+  },
   "scripts": {
     "dev": "vite dev",
     "preview": "vite preview",
@@ -16,6 +20,7 @@
     "@floating-ui/dom": "^1.4.5",
     "@sveltejs/adapter-auto": "^2.1.0",
     "@sveltejs/kit": "^1.22.3",
+    "@types/node": "^18.17.1",
     "@typescript-eslint/eslint-plugin": "^6.2.0",
     "@typescript-eslint/parser": "^6.2.0",
     "autoprefixer": "^10.4.14",
