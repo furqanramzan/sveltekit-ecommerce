@@ -2,13 +2,12 @@
   import { superForm } from 'sveltekit-superforms/client';
   import type { PageServerData } from './$types';
   import AppInput from '$lib/components/AppInput.svelte';
-  import ErrorAlert from '$lib/components/ErrorAlert.svelte';
   import SubmitButton from '$lib/components/buttons/SubmitButton.svelte';
   import { upsertAdminSchema } from '$lib/validation';
 
   export let data: PageServerData;
 
-  const { form, errors, delayed, enhance, message } = superForm(data.form, {
+  const { form, errors, delayed, enhance } = superForm(data.form, {
     validators: upsertAdminSchema,
   });
 </script>
@@ -23,9 +22,6 @@
       >
         Create your account
       </h1>
-      {#if $message}
-        <ErrorAlert>{$message}</ErrorAlert>
-      {/if}
       <form use:enhance method="post" class="space-y-4 md:space-y-6">
         <div>
           <AppInput

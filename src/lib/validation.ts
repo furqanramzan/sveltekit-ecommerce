@@ -1,13 +1,13 @@
 import { z } from 'zod';
 
 export const upsertAdminSchema = z.object({
-  id: z.coerce.number().optional(),
-  name: z.coerce.string().min(1).max(256),
-  email: z.coerce.string().email().min(1).max(256),
-  password: z.coerce.string().min(1).max(256),
+  id: z.number().optional(),
+  name: z.string().min(1).max(256),
+  email: z.string().email().min(1).max(256),
+  password: z.string().max(256).optional(),
 });
 
-export const loginSchema = upsertAdminSchema.pick({
-  email: true,
-  password: true,
+export const loginSchema = z.object({
+  email: z.string().email().min(1).max(256),
+  password: z.string().max(256),
 });

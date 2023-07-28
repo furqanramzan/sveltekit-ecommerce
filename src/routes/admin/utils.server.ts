@@ -21,9 +21,9 @@ export async function upsertAdmin(input: z.infer<typeof upsertAdminSchema>) {
   if (id) {
     const result = await repository.update(values, id);
     admin = throwIfNotFound(result);
+  } else {
+    admin = await repository.create(values);
   }
-
-  admin = await repository.create(values);
 
   await savePassword(admin.id, password);
 

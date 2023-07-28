@@ -1,7 +1,6 @@
-import { error, redirect } from '@sveltejs/kit';
-import { message, superValidate } from 'sveltekit-superforms/server';
+import { error, fail, redirect } from '@sveltejs/kit';
+import { superValidate } from 'sveltekit-superforms/server';
 import type { Actions, PageServerLoad } from './$types';
-import { validationErrorMessage } from '$lib/constants';
 import { useRepository } from '$lib/server/repositories';
 import { upsertAdminSchema } from '$lib/validation';
 import { upsertAdmin } from '$admin/utils.server';
@@ -28,7 +27,7 @@ export const actions = {
 
     const form = await superValidate(event, upsertAdminSchema);
     if (!form.valid) {
-      return message(form, validationErrorMessage);
+      return fail(400, { form });
     }
 
     await upsertAdmin(form.data);

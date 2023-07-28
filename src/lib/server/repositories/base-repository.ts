@@ -22,6 +22,7 @@ interface GetMany {
   limit: number;
   offset: number;
 }
+export type AnyRepository = BaseRepository<BaseTable>;
 
 export class BaseRepository<TBaseTable extends BaseTable> {
   protected table: TBaseTable;
@@ -62,7 +63,7 @@ export class BaseRepository<TBaseTable extends BaseTable> {
     }
     const data = await this.drizzle.select().from(this.table).limit(1).offset(0).where(where);
 
-    return data[0] ? data[0] : null;
+    return data[0] ? data[0] : undefined;
   }
 
   async destroy(id: number) {
@@ -77,7 +78,7 @@ export class BaseRepository<TBaseTable extends BaseTable> {
   ) {
     const data = await this.drizzle.select().from(this.table).where(eq(column, value));
 
-    return data[0] ? data[0] : null;
+    return data[0] ? data[0] : undefined;
   }
 
   async exists<TColumn extends AnyColumn>(
@@ -107,18 +108,10 @@ export class BaseRepository<TBaseTable extends BaseTable> {
   }
 
   updateResponse(result: MySqlRawQueryResult, id: number) {
-    return result[0].affectedRows === 0 ? null : { id };
+    return result[0].affectedRows === 0 ? undefined : { id };
   }
 
   destroyResponse(result: MySqlRawQueryResult, id: number) {
     return this.updateResponse(result, id);
-  }
-
-  getDrizzle() {
-    return this.drizzle;
-  }
-
-  getTable() {
-    return this.table;
   }
 }

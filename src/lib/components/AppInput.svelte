@@ -38,6 +38,9 @@
 
   export let input: InputItem;
   export let value: string | number = '';
+  if (input.value) {
+    value = input.value;
+  }
 
   $: name = input.name;
   $: min = input.min || 0;

@@ -1,8 +1,7 @@
-import { redirect } from '@sveltejs/kit';
+import { fail, redirect } from '@sveltejs/kit';
 import { message, superValidate } from 'sveltekit-superforms/server';
 import type { Actions, PageServerLoad } from './$types';
-import { validationErrorMessage } from '$lib/constants';
-import { loginSchema } from '$lib/validation';
+import { loginSchema } from '$lib/server/validation';
 import { useRepository } from '$lib/server/repositories';
 import { hash } from '$lib/authentication/hash';
 import { jwt } from '$lib/authentication/jwt';
@@ -17,7 +16,7 @@ export const actions = {
   default: async (event) => {
     const form = await superValidate(event, loginSchema);
     if (!form.valid) {
-      return message(form, validationErrorMessage);
+      return fail(400, { form });
     }
 
     const { email, password } = form.data;
