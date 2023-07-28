@@ -29,6 +29,9 @@ module.exports = {
       parserOptions: {
         parser: '@typescript-eslint/parser',
       },
+      rules: {
+        'import/no-mutable-exports': 'off',
+      },
     },
   ],
 };
