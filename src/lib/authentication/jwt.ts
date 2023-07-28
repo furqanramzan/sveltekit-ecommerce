@@ -1,6 +1,12 @@
 import jwtwebtoken from 'jsonwebtoken';
 import { JWT_SECRET } from '$env/static/private';
 
+export interface JwtData {
+  id: number;
+  name: string;
+  email: string;
+}
+
 class Jwt {
   private secret: string;
 
@@ -8,7 +14,7 @@ class Jwt {
     this.secret = JWT_SECRET;
   }
 
-  encode(data: object) {
+  encode(data: JwtData) {
     return jwtwebtoken.sign({ ...data }, this.secret);
   }
 
@@ -21,14 +27,14 @@ class Jwt {
     }
   }
 
-  decode<T>(token: string) {
-    return jwtwebtoken.decode(token) as T;
+  decode(token: string) {
+    return jwtwebtoken.decode(token) as JwtData;
   }
 
-  verifyAndDecode<T>(token: string) {
+  verifyAndDecode(token: string) {
     const verified = this.verify(token);
     if (verified) {
-      return this.decode<T>(token);
+      return this.decode(token);
     } else {
       return null;
     }

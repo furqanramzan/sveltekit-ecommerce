@@ -1,3 +1,4 @@
+import { redirect } from '@sveltejs/kit';
 import { message, superValidate } from 'sveltekit-superforms/server';
 import type { Actions, PageServerLoad } from './$types';
 import { validationErrorMessage } from '$lib/constants';
@@ -29,6 +30,8 @@ export const actions = {
       if (passwordMatched) {
         const token = jwt.encode(jwtData);
         setToken(event, token);
+
+        throw redirect(303, '/admin/auth/dashboard');
       }
     }
 
