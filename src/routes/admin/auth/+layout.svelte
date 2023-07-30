@@ -17,6 +17,12 @@
       href: '/admin/auth/admin/list',
       icon: 'mdi:account-multiple',
     },
+    {
+      name: 'Products',
+      active: '/admin/auth/product',
+      href: '/admin/auth/product/list',
+      icon: 'mdi:shopping',
+    },
   ];
 </script>
 

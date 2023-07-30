@@ -16,11 +16,11 @@
   <div
     class="flex flex-col items-center justify-between space-y-3 md:flex-row md:space-x-4 md:space-y-0"
   >
-    <AppHeading>All admins</AppHeading>
+    <AppHeading>All products</AppHeading>
     <div
       class="flex w-full flex-shrink-0 flex-col items-stretch justify-end space-y-2 md:w-auto md:flex-row md:items-center md:space-x-3 md:space-y-0"
     >
-      <AppAddLink href="/admin/auth/admin/upsert">admin</AppAddLink>
+      <AppAddLink href="/admin/auth/product/upsert">product</AppAddLink>
     </div>
   </div>
 
@@ -29,7 +29,8 @@
       <thead class="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
         <tr>
           <th scope="col" class="px-6 py-3"> Name </th>
-          <th scope="col" class="px-6 py-3"> Email </th>
+          <th scope="col" class="px-6 py-3"> Price </th>
+          <th scope="col" class="px-6 py-3"> Quantity </th>
           <th scope="col" class="px-6 py-3">
             <span class="sr-only">Actions</span>
           </th>
@@ -37,7 +38,7 @@
       </thead>
       <tbody>
         <NoDataRow totalItems={items.length} colspan={3} />
-        {#each items as { id, name, email }}
+        {#each items as { id, name, price, quantity }}
           <tr
             class="border-b bg-white hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-600"
           >
@@ -47,17 +48,18 @@
             >
               {name}
             </th>
-            <td class="px-6 py-4"> {email} </td>
+            <td class="px-6 py-4"> {price} </td>
+            <td class="px-6 py-4"> {quantity} </td>
             <td class="flex justify-end gap-4 px-6 py-4">
               <a
-                href="/admin/auth/admin/{id}/upsert"
+                href="/admin/auth/product/{id}/upsert"
                 class="font-medium text-blue-600 hover:underline dark:text-blue-500">Edit</a
               >
               <form
                 use:enhance
                 class="inline-block"
                 method="post"
-                action="/admin/auth/admin/{id}/list"
+                action="/admin/auth/product/{id}/list"
               >
                 <button
                   type="submit"
@@ -72,7 +74,8 @@
       <tfoot class="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
         <tr>
           <th scope="col" class="px-6 py-3"> Name </th>
-          <th scope="col" class="px-6 py-3"> Email </th>
+          <th scope="col" class="px-6 py-3"> Price </th>
+          <th scope="col" class="px-6 py-3"> Quantity </th>
           <th scope="col" class="px-6 py-3">
             <span class="sr-only">Actions</span>
           </th>
