@@ -15,6 +15,13 @@
       "when": 1690743641462,
       "tag": "0001_nostalgic_stature",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1690802615467,
+      "tag": "0002_cuddly_stellaris",
+      "breakpoints": true
     }
   ]
 }

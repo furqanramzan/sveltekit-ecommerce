@@ -1,0 +1,1 @@
+ALTER TABLE `skec_products` ADD `image` varchar(256);

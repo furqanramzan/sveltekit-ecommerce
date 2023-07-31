@@ -15,6 +15,7 @@
   {#each columns as column}
     <td class="px-6 py-4"> {column} </td>
   {/each}
+  <slot />
   <td class="flex justify-end gap-4 px-6 py-4">
     <a
       href="/admin/auth/product/{itemId}/upsert"

@@ -5,6 +5,8 @@
   import { upsertProductSchema } from '$lib/validation';
   import AppTextarea from '$lib/components/AppTextarea.svelte';
   import AppForm from '$lib/components/AppForm.svelte';
+  import AppFileInput from '$lib/components/AppFileInput.svelte';
+  import { page } from '$app/stores';
 
   export let data: PageServerData;
 
@@ -14,7 +16,12 @@
   });
 </script>
 
-<AppForm name={{ singular: 'product' }} {enhance} submitting={$submitting}>
+<AppForm
+  {enhance}
+  enctype="multipart/form-data"
+  name={{ singular: 'product' }}
+  submitting={$submitting}
+>
   <div class="sm:col-span-2">
     <AppInput
       input={{
@@ -60,6 +67,18 @@
         value: data.item?.description,
       }}
       bind:value={$form.description}
+    />
+  </div>
+  <div class="col-span-2">
+    <AppFileInput
+      input={{
+        name: 'image',
+        type: 'file',
+        min: 5,
+        multiple: true,
+        required: !$page.params.id,
+        errors: $errors.image,
+      }}
     />
   </div>
 </AppForm>

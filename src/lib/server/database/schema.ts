@@ -39,6 +39,7 @@ export const products = mysqlTable('products', {
   description: text('description').notNull(),
   price: float('price').notNull(),
   quantity: int('quantity').notNull(),
+  image: varchar('image', { length: 256 }),
   createdAt: timestamp('created_at').notNull().defaultNow(),
   updatedAt: timestamp('updated_at').notNull().defaultNow(),
 });

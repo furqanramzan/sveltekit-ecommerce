@@ -4,6 +4,7 @@ import type { Actions, PageServerLoad } from './$types';
 import { upsertProductSchema } from '$lib/server/validation';
 import { useRepository } from '$lib/server/repositories';
 import { throwIfNotFound } from '$lib/utils';
+import { uploadFile } from '$lib/server/upload-file';
 
 const repository = useRepository('product');
 
@@ -34,9 +35,17 @@ export const actions = {
       return fail(400, { form });
     }
 
+    const image = await uploadFile('image', formData, 'one');
+    if (image) {
+      form.data.image = image;
+    } else if (!id) {
+      form.errors.image = ['Required'];
+      return fail(400, { form });
+    }
+
     if (id) {
       const result = await repository.update(form.data, Number(id));
-      await throwIfNotFound(result);
+      throwIfNotFound(result);
     } else {
       await repository.create(form.data);
     }

@@ -13,9 +13,15 @@
   {items}
   {totalPages}
   name={{ singular: 'product' }}
-  columns={['Name', 'Price', 'Quantity', 'Description']}
+  columns={['Name', 'Price', 'Quantity', 'Image']}
 >
-  {#each items as { id, name, description, price, quantity }}
-    <AppRow itemId={id} headingColumn={name} columns={[price, quantity, description]} />
+  {#each items as { id, name, price, quantity, image }}
+    <AppRow itemId={id} headingColumn={name} columns={[price, quantity]}>
+      <td class="px-6 py-4">
+        <a href={image} target="_blank">
+          <img class="h-8 w-8 rounded-lg" src={image} alt={name} />
+        </a>
+      </td>
+    </AppRow>
   {/each}
 </AppTable>

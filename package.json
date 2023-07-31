@@ -18,6 +18,8 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.39.8",
+    "@aws-sdk/client-s3": "^3.379.1",
+    "@aws-sdk/lib-storage": "^3.379.1",
     "@floating-ui/dom": "^1.4.5",
     "@iconify/svelte": "^3.1.4",
     "@sveltejs/adapter-auto": "^2.1.0",

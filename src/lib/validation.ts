@@ -16,6 +16,7 @@ export const upsertProductSchema = z.object({
   id: z.coerce.number().optional(),
   name: z.string().min(1).max(256),
   description: z.string().min(1).max(256),
+  image: z.custom(),
   price: z.coerce
     .number()
     .positive()
