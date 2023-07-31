@@ -4,7 +4,7 @@ import { formatListParams, formatListResponse } from '$lib/utils/list';
 import { throwIfNotFound } from '$lib/utils';
 import { deleteFile } from '$lib/server/file';
 
-const repository = useRepository('product');
+const repository = useRepository('category');
 
 export const load = (async (event) => {
   const params = formatListParams(event);

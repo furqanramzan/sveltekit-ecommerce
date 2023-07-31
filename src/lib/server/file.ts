@@ -1,4 +1,4 @@
-import { store } from './s-three';
+import { destroy, store } from './s-three';
 
 export async function uploadFile<T extends string, TType extends 'one' | 'many'>(
   name: T,
@@ -25,4 +25,11 @@ export async function uploadFile<T extends string, TType extends 'one' | 'many'>
   };
 
   return result[type];
+}
+
+export function deleteFile(key?: string | null) {
+  if (key) {
+    key = decodeURIComponent(key.slice(key.indexOf('.com') + 5));
+    return destroy(key);
+  }
 }

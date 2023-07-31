@@ -1,15 +1,15 @@
 import { fail, redirect } from '@sveltejs/kit';
 import { superValidate } from 'sveltekit-superforms/server';
 import type { Actions, PageServerLoad } from './$types';
-import { upsertProductSchema } from '$lib/server/validation';
+import { upsertCategorySchema } from '$lib/server/validation';
 import { useRepository } from '$lib/server/repositories';
 import { throwIfNotFound } from '$lib/utils';
 import { deleteFile, uploadFile } from '$lib/server/file';
 
-const repository = useRepository('product');
+const repository = useRepository('category');
 
 export const load = (async (event) => {
-  const form = await superValidate(upsertProductSchema);
+  const form = await superValidate(upsertCategorySchema);
 
   const id = Number(event.params.id);
   if (id) {
@@ -30,7 +30,7 @@ export const actions = {
     if (id) {
       formData.append('id', String(id));
     }
-    const form = await superValidate(formData, upsertProductSchema);
+    const form = await superValidate(formData, upsertCategorySchema);
     if (!form.valid) {
       return fail(400, { form });
     }
@@ -54,6 +54,6 @@ export const actions = {
       await repository.create(form.data);
     }
 
-    throw redirect(303, '/admin/auth/product/list');
+    throw redirect(303, '/admin/auth/category/list');
   },
 } satisfies Actions;

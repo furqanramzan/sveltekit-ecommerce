@@ -18,6 +18,12 @@
       icon: 'mdi:account-multiple',
     },
     {
+      name: 'Categories',
+      active: '/admin/auth/category',
+      href: '/admin/auth/category/list',
+      icon: 'mdi:layers-triple',
+    },
+    {
       name: 'Products',
       active: '/admin/auth/product',
       href: '/admin/auth/product/list',

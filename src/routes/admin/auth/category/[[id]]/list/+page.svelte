@@ -8,17 +8,12 @@
   $: items = data.data.items;
   $: totalPages = data.data.totalPages;
 
-  const name = { singular: 'product' };
+  const name = { singular: 'category', plural: 'categories' };
 </script>
 
-<AppTable {items} {totalPages} {name} columns={['Name', 'Price', 'Quantity', 'Image']}>
+<AppTable {items} {totalPages} {name} columns={['Name', 'Image']}>
   {#each items as item}
-    <AppRow
-      itemId={item.id}
-      headingColumn={item.name}
-      columns={[item.price, item.quantity]}
-      link={name.singular}
-    >
+    <AppRow itemId={item.id} headingColumn={item.name} link={name.singular}>
       <td class="px-6 py-4">
         <a href={item.image} target="_blank">
           <img class="h-8 w-8 rounded-lg" src={item.image} alt={item.name} />

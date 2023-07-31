@@ -33,6 +33,14 @@ export const adminPasswords = mysqlTable('admin_passwords', {
   password: varchar('password', { length: 256 }).notNull(),
 });
 
+export const categories = mysqlTable('categories', {
+  id: serial('id').primaryKey(),
+  name: varchar('name', { length: 256 }).notNull(),
+  image: varchar('image', { length: 256 }),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow(),
+});
+
 export const products = mysqlTable('products', {
   id: serial('id').primaryKey(),
   name: varchar('name', { length: 256 }).notNull(),

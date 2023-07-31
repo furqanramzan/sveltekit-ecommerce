@@ -7,10 +7,17 @@
 
   $: items = data.data.items;
   $: totalPages = data.data.totalPages;
+
+  const name = { singular: 'admin' };
 </script>
 
-<AppTable {items} {totalPages} name={{ singular: 'admin' }} columns={['Name', 'Email']}>
-  {#each items as { id, name, email }}
-    <AppRow itemId={id} headingColumn={name} columns={[email]} />
+<AppTable {items} {totalPages} {name} columns={['Name', 'Email']}>
+  {#each items as item}
+    <AppRow
+      itemId={item.id}
+      headingColumn={item.name}
+      columns={[item.email]}
+      link={name.singular}
+    />
   {/each}
 </AppTable>

@@ -39,7 +39,6 @@ export async function store(file: File) {
 export async function destroy(key: string) {
   const client = getClient();
 
-  key = decodeURIComponent(key.slice(key.indexOf('.com') + 5));
   const command = new DeleteObjectCommand({
     Bucket,
     Key: key,

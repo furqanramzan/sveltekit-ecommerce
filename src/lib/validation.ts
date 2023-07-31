@@ -26,3 +26,9 @@ export const upsertProductSchema = z.object({
     .positive()
     .default('' as unknown as number),
 });
+
+export const upsertCategorySchema = z.object({
+  id: z.coerce.number().optional(),
+  name: z.string().min(1).max(256),
+  image: z.custom(),
+});
