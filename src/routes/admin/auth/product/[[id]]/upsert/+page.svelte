@@ -7,6 +7,7 @@
   import AppForm from '$lib/components/AppForm.svelte';
   import AppFileInput from '$lib/components/AppFileInput.svelte';
   import { page } from '$app/stores';
+  import AppSelect from '$lib/components/AppSelect.svelte';
 
   export let data: PageServerData;
 
@@ -22,6 +23,20 @@
   name={{ singular: 'product' }}
   submitting={$submitting}
 >
+  <div class="sm:col-span-2">
+    <AppSelect
+      input={{
+        name: 'categoryId',
+        as: 'category',
+        errors: $errors.categoryId,
+        value: data.item?.categoryId,
+      }}
+      bind:value={$form.categoryId}
+      options={data.categories}
+      valueKey="id"
+      textKey="name"
+    />
+  </div>
   <div class="sm:col-span-2">
     <AppInput
       input={{

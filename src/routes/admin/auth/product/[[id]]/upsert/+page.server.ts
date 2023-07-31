@@ -7,20 +7,20 @@ import { throwIfNotFound } from '$lib/utils';
 import { deleteFile, uploadFile } from '$lib/server/file';
 
 const repository = useRepository('product');
+const categoryRepository = useRepository('category');
 
 export const load = (async (event) => {
+  const categories = await categoryRepository.getManyWithName();
+
   const form = await superValidate(upsertProductSchema);
 
   const id = Number(event.params.id);
   if (id) {
     const item = await repository.getOne(id);
-    return {
-      item,
-      form,
-    };
+    return { item, form, categories };
   }
 
-  return { form };
+  return { form, categories };
 }) satisfies PageServerLoad;
 
 export const actions = {

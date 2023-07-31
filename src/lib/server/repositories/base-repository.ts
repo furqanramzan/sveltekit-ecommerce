@@ -18,7 +18,7 @@ interface BaseTableConfig {
   };
 }
 type BaseTable = MySqlTableWithColumns<BaseTableConfig>;
-interface GetMany {
+export interface GetMany {
   limit: number;
   offset: number;
 }
@@ -94,11 +94,13 @@ export class BaseRepository<TBaseTable extends BaseTable> {
     }
 
     const data = await this.drizzle
-      .select({ count: sql<number>`count(${this.table.id})` })
+      .select({ id: this.table.id })
       .from(this.table)
-      .where(where);
+      .where(where)
+      .limit(1)
+      .offset(0);
 
-    return data[0].count > 0;
+    return !!data[0];
   }
 
   createResponse(result: MySqlRawQueryResult) {

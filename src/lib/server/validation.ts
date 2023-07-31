@@ -1,5 +1,8 @@
 import { useRepository } from './repositories';
-import { upsertAdminSchema as upsertAdmin } from '$lib/validation';
+import {
+  upsertAdminSchema as upsertAdmin,
+  upsertProductSchema as upsertProduct,
+} from '$lib/validation';
 
 export * from '$lib/validation';
 
@@ -17,3 +20,11 @@ export const upsertAdminSchema = upsertAdmin
     message: 'The email already exists.',
     path: ['email'],
   });
+
+export const upsertProductSchema = upsertProduct.refine(
+  ({ categoryId }) => useRepository('category').idExists(categoryId),
+  {
+    message: 'Invalid cateogry',
+    path: ['categoryId'],
+  },
+);

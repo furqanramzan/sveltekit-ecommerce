@@ -21,4 +21,14 @@ export class CategoryRepository extends BaseRepository<Category> {
 
     return this.updateResponse(result, id);
   }
+
+  getManyWithName() {
+    return this.drizzle.query.categories.findMany({
+      columns: { id: true, name: true },
+    });
+  }
+
+  idExists(id: number) {
+    return this.exists(this.table.id, id);
+  }
 }
