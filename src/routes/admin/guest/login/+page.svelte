@@ -47,7 +47,7 @@
             }}
           />
         </div>
-        <SubmitButton loading={$delayed} wFull={true}>Sign in</SubmitButton>
+        <SubmitButton submitting={$delayed} wFull={true}>Sign in</SubmitButton>
       </form>
     </div>
   </div>

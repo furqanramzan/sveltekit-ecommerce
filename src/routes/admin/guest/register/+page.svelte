@@ -57,7 +57,7 @@
             bind:value={$form.password}
           />
         </div>
-        <SubmitButton loading={$delayed} wFull={true}>Sign up</SubmitButton>
+        <SubmitButton submitting={$delayed} wFull={true}>Sign up</SubmitButton>
       </form>
     </div>
   </div>
