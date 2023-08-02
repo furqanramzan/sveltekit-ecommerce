@@ -1,4 +1,5 @@
 import { env } from 'node:process';
+import sharp from 'sharp';
 import { sThree } from './s-three';
 import { local } from './local';
 
@@ -12,7 +13,7 @@ export async function uploadFile<T extends string, TType extends 'one' | 'many'>
   formData: FormData,
   type: TType,
 ) {
-  const files = formData.getAll(name).filter((x) => x instanceof File && x.size > 0) as File[];
+  const files = getFiles(formData, name);
 
   if (files.length === 0) {
     return;
@@ -20,7 +21,8 @@ export async function uploadFile<T extends string, TType extends 'one' | 'many'>
 
   const links: string[] = [];
   for await (const file of files) {
-    const link = await filesystem.store(file);
+    const { file: optimizedFile, name } = await optimizeFile(file);
+    const link = await filesystem.store(optimizedFile, name);
     if (link) {
       links.push(link);
     }
@@ -39,4 +41,13 @@ export function deleteFile(key?: string | null) {
   if (key) {
     return filesystem.destroy(key);
   }
+}
+
+function getFiles(formData: FormData, name: string) {
+  return formData.getAll(name).filter((x) => x instanceof File && x.size > 0) as File[];
+}
+
+async function optimizeFile(file: File) {
+  const input = await file.arrayBuffer();
+  return { file: sharp(input).webp(), name: `${crypto.randomUUID()}.webp` };
 }

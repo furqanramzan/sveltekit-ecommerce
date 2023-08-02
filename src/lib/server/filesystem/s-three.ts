@@ -1,8 +1,10 @@
 import { env } from 'node:process';
+import type { Buffer } from 'node:buffer';
 import { z } from 'zod';
 import { DeleteObjectCommand, S3Client } from '@aws-sdk/client-s3';
 import { Upload } from '@aws-sdk/lib-storage';
 import type { CompleteMultipartUploadCommandOutput } from '@aws-sdk/client-s3';
+import type { Sharp } from 'sharp';
 import promise from '$lib/utils/promise';
 
 const constants = z
@@ -20,16 +22,23 @@ const region = constants.S3_REGION;
 const Bucket = constants.S3_BUCKET;
 const directory = constants.S3_DIRECTORY;
 
-export async function store(file: File) {
+export async function store(file: File | Sharp, name: string) {
   const client = getClient();
+  let body: File | Buffer;
+
+  if (file instanceof File) {
+    body = file;
+  } else {
+    body = await file.toBuffer();
+  }
 
   const upload = new Upload({
     client,
     params: {
       ACL: 'public-read',
       Bucket,
-      Key: `${directory}/${Date.now()}-${file.name}`,
-      Body: file,
+      Key: `${directory}/${name}`,
+      Body: body,
     },
   });
 
