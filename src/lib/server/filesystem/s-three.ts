@@ -33,19 +33,34 @@ export async function store(file: File) {
     },
   });
 
-  return promise<CompleteMultipartUploadCommandOutput>(() => upload.done(), true);
+  const uploadPromise = await promise<CompleteMultipartUploadCommandOutput>(
+    () => upload.done(),
+    true,
+  );
+
+  if (uploadPromise.success && uploadPromise.data.Location) {
+    return uploadPromise.data.Location;
+  }
 }
 
 export async function destroy(key: string) {
   const client = getClient();
 
+  key = decodeURIComponent(key.slice(key.indexOf('.com') + 5));
   const command = new DeleteObjectCommand({
     Bucket,
     Key: key,
   });
 
-  return promise(() => client.send(command), true);
+  await promise(() => client.send(command), true);
 }
+
+export class SThree {
+  store = store;
+  destroy = destroy;
+}
+
+export const sThree = new SThree();
 
 function getClient() {
   return new S3Client({

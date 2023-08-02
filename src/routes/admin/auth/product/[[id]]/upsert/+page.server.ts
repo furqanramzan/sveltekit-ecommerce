@@ -4,7 +4,7 @@ import type { Actions, PageServerLoad } from './$types';
 import { upsertProductSchema } from '$lib/server/validation';
 import { useRepository } from '$lib/server/repositories';
 import { throwIfNotFound } from '$lib/utils';
-import { deleteFile, uploadFile } from '$lib/server/file';
+import { deleteFile, uploadFile } from '$lib/server/filesystem';
 
 const repository = useRepository('product');
 const categoryRepository = useRepository('category');
