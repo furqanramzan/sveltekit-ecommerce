@@ -1,9 +1,12 @@
 <script lang="ts">
   import NoDataRow from './NoDataRow.svelte';
+  import DummyButton from './buttons/DummyButton.svelte';
   import AppHeading from '$lib/components/AppHeading.svelte';
   import AppAddLink from '$lib/components/AppAddLink.svelte';
   import AppPagination from '$lib/components/AppPagination.svelte';
+  import { enhance } from '$app/forms';
 
+  export let dummy = false;
   export let items: Record<string, unknown>[];
   export let columns: string[];
   export let totalPages: number;
@@ -21,6 +24,11 @@
     <div
       class="flex w-full flex-shrink-0 flex-col items-stretch justify-end space-y-2 md:w-auto md:flex-row md:items-center md:space-x-3 md:space-y-0"
     >
+      {#if dummy}
+        <form method="post" action="?/dummy" use:enhance>
+          <DummyButton />
+        </form>
+      {/if}
       <AppAddLink href="/admin/auth/{name.singular}/upsert">
         {name.singular}
       </AppAddLink>

@@ -1,11 +1,34 @@
 import { env } from 'node:process';
-import sharp from 'sharp';
+import sharp, { type ResizeOptions, type Sharp } from 'sharp';
 import { sThree } from './s-three';
 import { local } from './local';
 
 let filesystem = local;
 if (env.FILESYSTEM_DISK === 'S3') {
   filesystem = sThree;
+}
+
+const resizes: Record<'product' | 'category', ResizeOptions> = {
+  product: {
+    width: 320,
+    height: 288,
+    fit: 'contain',
+    background: { r: 0, g: 0, b: 0, alpha: 0 },
+  },
+  category: {
+    width: 48,
+    height: 48,
+    fit: 'contain',
+    background: { r: 0, g: 0, b: 0, alpha: 0 },
+  },
+};
+
+export async function uploadSharp<T extends keyof typeof resizes>(file: Sharp, resize?: T) {
+  if (resize) {
+    file.resize(resizes[resize]);
+  }
+  const link = await filesystem.store(file.webp(), `${crypto.randomUUID()}.webp`);
+  return link || '';
 }
 
 export async function uploadFile<T extends string, TType extends 'one' | 'many'>(

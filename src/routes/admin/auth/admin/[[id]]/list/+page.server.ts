@@ -16,7 +16,7 @@ export const load = (async (event) => {
 }) satisfies PageServerLoad;
 
 export const actions = {
-  default: async (event) => {
+  destroy: async (event) => {
     const id = Number(event.params.id);
     if (id) {
       const result = await repository.destroy(id);

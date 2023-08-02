@@ -3,7 +3,7 @@ import { BaseRepository, type GetMany } from './base-repository';
 import { products } from '$lib/server/database/schema';
 
 type Product = typeof products;
-type Create = InferModel<Product, 'insert'>;
+export type Create = InferModel<Product, 'insert'>;
 
 export class ProductRepository extends BaseRepository<Product> {
   constructor() {
@@ -25,6 +25,12 @@ export class ProductRepository extends BaseRepository<Product> {
     const result = await this.drizzle.insert(this.table).values(values);
 
     return this.createResponse(result);
+  }
+
+  async createMany(values: Create[]) {
+    const result = await this.drizzle.insert(this.table).values(values);
+
+    return this.createManyResponse(result);
   }
 
   async update(values: Create, id: number) {

@@ -16,6 +16,12 @@ export class CategoryRepository extends BaseRepository<Category> {
     return this.createResponse(result);
   }
 
+  async createMany(values: Create[]) {
+    const result = await this.drizzle.insert(this.table).values(values);
+
+    return this.createManyResponse(result);
+  }
+
   async update(values: Create, id: number) {
     const result = await this.drizzle.update(this.table).set(values).where(eq(this.table.id, id));
 
@@ -24,7 +30,7 @@ export class CategoryRepository extends BaseRepository<Category> {
 
   getManyWithName() {
     return this.drizzle.query.categories.findMany({
-      columns: { id: true, name: true },
+      columns: { id: true, name: true, image: true },
     });
   }
 

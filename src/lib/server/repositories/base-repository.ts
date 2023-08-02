@@ -1,4 +1,4 @@
-import { type AnyColumn, type GetColumnData, type SQL, and, eq, ne, sql } from 'drizzle-orm';
+import { type AnyColumn, type GetColumnData, type SQL, and, eq, gte, ne, sql } from 'drizzle-orm';
 import type { MySqlSerial, MySqlTableWithColumns } from 'drizzle-orm/mysql-core';
 import type { MySqlRawQueryResult } from 'drizzle-orm/mysql2';
 import { drizzle } from '$lib/server/database';
@@ -107,6 +107,13 @@ export class BaseRepository<TBaseTable extends BaseTable> {
     return {
       id: result[0].insertId,
     };
+  }
+
+  createManyResponse(result: MySqlRawQueryResult) {
+    return drizzle
+      .select({ id: this.table.id })
+      .from(this.table)
+      .where(gte(this.table.id, result[0].insertId));
   }
 
   updateResponse(result: MySqlRawQueryResult, id: number) {

@@ -22,7 +22,12 @@
       href="/admin/auth/{link}/{itemId}/upsert"
       class="font-medium text-blue-600 hover:underline dark:text-blue-500">Edit</a
     >
-    <form use:enhance class="inline-block" method="post" action="/admin/auth/{link}/{itemId}/list">
+    <form
+      use:enhance
+      class="inline-block"
+      method="post"
+      action="/admin/auth/{link}/{itemId}/list?/destroy"
+    >
       <button type="submit" class="font-medium text-blue-600 hover:underline dark:text-blue-500"
         >Delete</button
       >

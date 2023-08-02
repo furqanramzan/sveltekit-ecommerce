@@ -11,7 +11,13 @@
   const name = { singular: 'product' };
 </script>
 
-<AppTable {items} {totalPages} {name} columns={['Name', 'Price', 'Quantity', 'Category', 'Image']}>
+<AppTable
+  {items}
+  {totalPages}
+  {name}
+  columns={['Name', 'Price', 'Quantity', 'Category', 'Image']}
+  dummy
+>
   {#each items as item}
     <AppRow
       itemId={item.id}
