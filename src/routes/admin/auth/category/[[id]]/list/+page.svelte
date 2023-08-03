@@ -16,7 +16,7 @@
     <AppRow itemId={item.id} headingColumn={item.name} link={name.singular}>
       <td class="px-6 py-4">
         <a href={item.image} target="_blank">
-          <img class="h-8 w-8 rounded-md" src={item.image} alt={item.name} />
+          <img loading="lazy" class="h-8 w-8 rounded-md" src={item.image} alt={item.name} />
         </a>
       </td>
     </AppRow>

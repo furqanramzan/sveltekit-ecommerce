@@ -23,7 +23,7 @@
   <div class="w-full col-span-3">
     {#if products.items.length === 0}
       <div class="w-full flex flex-col items-center justify-center gap-10">
-        <img src={noDataFound} alt="No Products Found" />
+        <img loading="lazy" src={noDataFound} alt="No Products Found" />
         <h3 class="text-xl font-bold text-gray-900 dark:text-white">
           Currently, no product available with specified criteria.
         </h3>
@@ -38,9 +38,8 @@
               <div class="w-full text-center">
                 <a href="/">
                   <img
-                    class="p-8 rounded-t-lg w-80 h-72"
-                    width="320"
-                    height="288"
+                    loading="lazy"
+                    class="p-8 rounded-t-lg"
                     src={product.image}
                     alt={product.name}
                   />

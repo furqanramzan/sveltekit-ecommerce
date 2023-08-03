@@ -4,5 +4,5 @@
 </script>
 
 <a href="/">
-  <img src={logo} alt={PUBLIC_APP_NAME} />
+  <img loading="lazy" src={logo} alt={PUBLIC_APP_NAME} />
 </a>

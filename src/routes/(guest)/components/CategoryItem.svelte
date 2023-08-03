@@ -22,7 +22,7 @@
   class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 py-10"
 >
   <div class="flex flex-col items-center">
-    <img class="w-12 h-12 mb-3" width="48" height="48" src={category.image} alt={category.name} />
+    <img loading="lazy" class="mb-3" src={category.image} alt={category.name} />
     <span class="text-sm font-bold text-gray-900 dark:text-white">
       {category.name}
     </span>
