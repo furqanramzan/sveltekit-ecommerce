@@ -10,7 +10,7 @@ const repository = useRepository('product');
 export const load = (async (event) => {
   const params = formatListParams(event);
 
-  const items = await repository.getPaginatedItems(params);
+  const items = await repository.getManyWithCategory(params);
 
   const data = formatListResponse(items);
 

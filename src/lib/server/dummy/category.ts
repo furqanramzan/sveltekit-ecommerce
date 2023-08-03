@@ -7,6 +7,7 @@ import { useRepository } from '$lib/server/repositories';
 // Note: Category's index should be match with product's index.
 // Otherwise, products will be assign to the wrong category
 const categoriesData = [
+  { name: 'All', image: 'all' },
   { name: 'Sofa', image: 'sofa' },
   { name: 'Table', image: 'table' },
   { name: 'Double Bed', image: 'double-bed' },
@@ -25,7 +26,9 @@ export async function categories() {
   }
 
   const repository = useRepository('category');
-  return repository.createMany(data);
+  const items = await repository.createMany(data);
+  items.shift();
+  return items;
 }
 
 function getFileInCurrentDirectory(filename: string) {

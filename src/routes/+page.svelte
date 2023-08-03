@@ -14,7 +14,8 @@
   <div class="w-full sticky top-0">
     <div class="grid grid-cols-2 md:grid-cols-1 xl:grid-cols-2 gap-5">
       {#each categories as category}
-        <div
+        <a
+          href={category.name === 'All' ? '/' : `?category=${category.id}`}
           class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 py-10"
         >
           <div class="flex flex-col items-center">
@@ -29,7 +30,7 @@
               {category.name}
             </span>
           </div>
-        </div>
+        </a>
       {/each}
     </div>
   </div>
