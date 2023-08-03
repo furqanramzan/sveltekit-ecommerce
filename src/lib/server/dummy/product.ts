@@ -5,6 +5,8 @@ import { uploadSharp } from '$lib/server/filesystem';
 import { useRepository } from '$lib/server/repositories';
 import type { Create } from '$lib/server/repositories/product-repository';
 
+// Note: Product's index should be match with category's index.
+// Otherwise, products will be assign to the wrong category
 const productsData = [
   // Sofa
   [
@@ -228,6 +230,154 @@ const productsData = [
     },
   ],
 
+  // Wardrobe
+  [
+    {
+      name: 'Sliding Door Wardrobe 1',
+      description: 'A spacious sliding door wardrobe for your bedroom.',
+      price: 899,
+      quantity: 10,
+      image: 'wardrobe-1',
+    },
+    {
+      name: 'Sliding Door Wardrobe 2',
+      description: 'Another spacious sliding door wardrobe for your bedroom.',
+      price: 999,
+      quantity: 10,
+      image: 'wardrobe-2',
+    },
+    {
+      name: 'Walk-In Wardrobe',
+      description: 'A luxurious walk-in wardrobe for your clothing collection.',
+      price: 1499,
+      quantity: 10,
+      image: 'wardrobe-3',
+    },
+    {
+      name: 'Mirrored Wardrobe',
+      description: 'A stylish mirrored wardrobe for getting ready in style.',
+      price: 1199,
+      quantity: 10,
+      image: 'wardrobe-4',
+    },
+    {
+      name: 'Built-In Wardrobe',
+      description: 'A practical built-in wardrobe for maximizing space.',
+      price: 799,
+      quantity: 10,
+      image: 'wardrobe-5',
+    },
+    {
+      name: 'Corner Wardrobe',
+      description: 'A space-saving corner wardrobe for small bedrooms.',
+      price: 699,
+      quantity: 10,
+      image: 'wardrobe-6',
+    },
+    {
+      name: 'Linen Wardrobe',
+      description: 'A linen wardrobe for organizing your textiles.',
+      price: 499,
+      quantity: 10,
+      image: 'wardrobe-7',
+    },
+    {
+      name: "Children's Wardrobe",
+      description: "A fun and colorful wardrobe for kids' rooms.",
+      price: 399,
+      quantity: 10,
+      image: 'wardrobe-8',
+    },
+    {
+      name: 'Wooden Wardrobe',
+      description: 'A classic wooden wardrobe for timeless elegance.',
+      price: 899,
+      quantity: 10,
+      image: 'wardrobe-9',
+    },
+    {
+      name: 'Vintage Wardrobe',
+      description: 'A vintage wardrobe for a retro touch.',
+      price: 799,
+      quantity: 10,
+      image: 'wardrobe-10',
+    },
+  ],
+
+  // Dressing Table
+  [
+    {
+      name: 'Vanity Dressing Table 1',
+      description: 'A beautiful vanity dressing table with a mirror.',
+      price: 499,
+      quantity: 10,
+      image: 'dressing-table-1',
+    },
+    {
+      name: 'Vanity Dressing Table 2',
+      description: 'Another beautiful vanity dressing table with a mirror.',
+      price: 599,
+      quantity: 10,
+      image: 'dressing-table-2',
+    },
+    {
+      name: 'Modern Dressing Table',
+      description: 'A modern dressing table with ample storage.',
+      price: 699,
+      quantity: 10,
+      image: 'dressing-table-3',
+    },
+    {
+      name: 'Makeup Vanity Table',
+      description: 'A makeup vanity table with Hollywood-style lights.',
+      price: 799,
+      quantity: 10,
+      image: 'dressing-table-4',
+    },
+    {
+      name: 'Compact Dressing Table',
+      description: 'A compact dressing table for smaller spaces.',
+      price: 449,
+      quantity: 10,
+      image: 'dressing-table-5',
+    },
+    {
+      name: 'Corner Dressing Table',
+      description: 'A corner dressing table for space-efficient use.',
+      price: 549,
+      quantity: 10,
+      image: 'dressing-table-6',
+    },
+    {
+      name: 'Dressing Table with Drawers',
+      description: 'A dressing table with drawers for organizing your beauty essentials.',
+      price: 599,
+      quantity: 10,
+      image: 'dressing-table-7',
+    },
+    {
+      name: 'Vintage Dressing Table',
+      description: 'A vintage dressing table for a touch of nostalgia.',
+      price: 799,
+      quantity: 10,
+      image: 'dressing-table-8',
+    },
+    {
+      name: 'Foldable Dressing Table',
+      description: 'A foldable dressing table for easy storage.',
+      price: 349,
+      quantity: 10,
+      image: 'dressing-table-9',
+    },
+    {
+      name: 'Glamorous Dressing Table',
+      description: 'A glamorous dressing table for a luxurious makeup routine.',
+      price: 899,
+      quantity: 10,
+      image: 'dressing-table-10',
+    },
+  ],
+
   // Office Chair
   [
     {
@@ -299,6 +449,80 @@ const productsData = [
       price: 299,
       quantity: 10,
       image: 'offcie-chair-10',
+    },
+  ],
+
+  // Coffee Table
+  [
+    {
+      name: 'Modern Coffee Table 1',
+      description: 'A modern coffee table for your living room.',
+      price: 299,
+      quantity: 10,
+      image: 'coffee-table-1',
+    },
+    {
+      name: 'Modern Coffee Table 2',
+      description: 'Another modern coffee table for your living room.',
+      price: 349,
+      quantity: 10,
+      image: 'coffee-table-2',
+    },
+    {
+      name: 'Wooden Coffee Table',
+      description: 'A classic wooden coffee table for timeless appeal.',
+      price: 399,
+      quantity: 10,
+      image: 'coffee-table-3',
+    },
+    {
+      name: 'Glass Top Coffee Table',
+      description: 'A coffee table with a glass top for a contemporary look.',
+      price: 399,
+      quantity: 10,
+      image: 'coffee-table-4',
+    },
+    {
+      name: 'Round Coffee Table',
+      description: 'A round coffee table for a cozy conversation area.',
+      price: 299,
+      quantity: 10,
+      image: 'coffee-table-5',
+    },
+    {
+      name: 'Marble Coffee Table',
+      description: 'A luxurious marble coffee table for elegant living rooms.',
+      price: 449,
+      quantity: 10,
+      image: 'coffee-table-6',
+    },
+    {
+      name: 'Industrial Coffee Table',
+      description: 'An industrial style coffee table for a trendy vibe.',
+      price: 349,
+      quantity: 10,
+      image: 'coffee-table-7',
+    },
+    {
+      name: 'Nested Coffee Tables',
+      description: 'Nested coffee tables for flexible use and easy storage.',
+      price: 399,
+      quantity: 10,
+      image: 'coffee-table-8',
+    },
+    {
+      name: 'Oval Coffee Table',
+      description: 'An oval coffee table for a unique focal point.',
+      price: 349,
+      quantity: 10,
+      image: 'coffee-table-9',
+    },
+    {
+      name: 'Farmhouse Coffee Table',
+      description: 'A rustic farmhouse coffee table for a cozy ambiance.',
+      price: 399,
+      quantity: 10,
+      image: 'coffee-table-10',
     },
   ],
 ];
