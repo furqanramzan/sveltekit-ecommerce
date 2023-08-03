@@ -1,4 +1,4 @@
-import { type InferModel, eq } from 'drizzle-orm';
+import { type InferModel, desc, eq } from 'drizzle-orm';
 import { BaseRepository } from './base-repository';
 import { categories } from '$lib/server/database/schema';
 
@@ -31,6 +31,7 @@ export class CategoryRepository extends BaseRepository<Category> {
   getManyWithName() {
     return this.drizzle.query.categories.findMany({
       columns: { id: true, name: true, image: true },
+      orderBy: desc(this.table.createdAt),
     });
   }
 

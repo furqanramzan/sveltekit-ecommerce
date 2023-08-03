@@ -1,5 +1,15 @@
-import { type AnyColumn, type GetColumnData, type SQL, and, eq, gte, ne, sql } from 'drizzle-orm';
-import type { MySqlSerial, MySqlTableWithColumns } from 'drizzle-orm/mysql-core';
+import {
+  type AnyColumn,
+  type GetColumnData,
+  type SQL,
+  and,
+  desc,
+  eq,
+  gte,
+  ne,
+  sql,
+} from 'drizzle-orm';
+import type { MySqlSerial, MySqlTableWithColumns, MySqlTimestamp } from 'drizzle-orm/mysql-core';
 import type { MySqlRawQueryResult } from 'drizzle-orm/mysql2';
 import { drizzle } from '$lib/server/database';
 
@@ -14,6 +24,22 @@ interface BaseTableConfig {
       driverParam: number;
       hasDefault: true;
       notNull: true;
+    }>;
+    createdAt: MySqlTimestamp<{
+      tableName: string;
+      name: 'created_at';
+      data: Date;
+      driverParam: string | number;
+      notNull: true;
+      hasDefault: true;
+    }>;
+    updatedAt: MySqlTimestamp<{
+      tableName: string;
+      name: 'updated_at';
+      data: Date;
+      driverParam: string | number;
+      notNull: true;
+      hasDefault: true;
     }>;
   };
 }
@@ -37,7 +63,12 @@ export class BaseRepository<TBaseTable extends BaseTable> {
     if (params) {
       const { limit, offset } = params;
 
-      const items = await this.drizzle.select().from(this.table).limit(limit).offset(offset);
+      const items = await this.drizzle
+        .select()
+        .from(this.table)
+        .orderBy(desc(this.table.createdAt))
+        .limit(limit)
+        .offset(offset);
 
       const total = await this.count();
 

@@ -1,4 +1,4 @@
-import { type InferModel, eq } from 'drizzle-orm';
+import { type InferModel, desc, eq } from 'drizzle-orm';
 import { BaseRepository } from './base-repository';
 import { admins } from '$lib/server/database/schema';
 
@@ -31,6 +31,7 @@ export class AdminRepository extends BaseRepository<Admin> {
       with: { adminPassword: true },
       columns: { id: true, name: true, email: true },
       where: eq(this.table.email, email),
+      orderBy: desc(this.table.createdAt),
     });
   }
 }
