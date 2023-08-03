@@ -5,6 +5,7 @@
   import AppAddLink from '$lib/components/AppAddLink.svelte';
   import AppPagination from '$lib/components/AppPagination.svelte';
   import { enhance } from '$app/forms';
+  import { dev } from '$app/environment';
 
   export let dummy = false;
   export let items: Record<string, unknown>[];
@@ -24,7 +25,7 @@
     <div
       class="flex w-full flex-shrink-0 flex-col items-stretch justify-end space-y-2 md:w-auto md:flex-row md:items-center md:space-x-3 md:space-y-0"
     >
-      {#if dummy}
+      {#if dummy && dev}
         <form method="post" action="?/dummy" use:enhance>
           <DummyButton />
         </form>
