@@ -4,7 +4,20 @@
 
   export let totalPages: number;
 
-  $: pathname = $page.url.pathname;
+  let searchParams: string;
+  $: {
+    const allParams = Object.fromEntries($page.url.searchParams);
+    if (allParams.page) {
+      delete allParams.page;
+    }
+    const allParamsString = new URLSearchParams(allParams).toString();
+    if (allParamsString) {
+      searchParams = `?${allParamsString}&`;
+    } else {
+      searchParams = '?';
+    }
+  }
+  $: pathname = $page.url.pathname + searchParams;
 
   $: currentPage = Number($page.url.searchParams.get('page')) || 1;
 
@@ -21,7 +34,7 @@
       <ul class="inline-flex h-10 -space-x-px text-base">
         <li>
           <a
-            href="{pathname}?page={currentPage === 1 ? 1 : currentPage - 1}"
+            href="{pathname}page={currentPage === 1 ? 1 : currentPage - 1}"
             class="ml-0 flex h-10 items-center justify-center rounded-l-lg border border-gray-300 bg-white px-4 leading-tight text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
           >
             <Icon icon="mdi:arrow-left" />
@@ -30,7 +43,7 @@
         {#each generateArray(totalPages) as page}
           <li>
             <a
-              href="{pathname}?page={page}"
+              href="{pathname}page={page}"
               aria-current={currentPage === page ? 'page' : undefined}
               class="flex h-10 items-center justify-center border px-4 leading-tight {currentPage ===
               page
@@ -42,7 +55,7 @@
         {/each}
         <li>
           <a
-            href="{pathname}?page={currentPage === totalPages ? totalPages : currentPage + 1}"
+            href="{pathname}page={currentPage === totalPages ? totalPages : currentPage + 1}"
             class="flex h-10 items-center justify-center rounded-r-lg border border-gray-300 bg-white px-4 leading-tight text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
           >
             <Icon icon="mdi:arrow-right" />
