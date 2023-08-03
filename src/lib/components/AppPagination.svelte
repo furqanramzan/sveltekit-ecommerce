@@ -1,16 +1,12 @@
 <script lang="ts">
   import Icon, { loadIcons } from '@iconify/svelte';
   import { page } from '$app/stores';
+  import { getParamsString } from '$lib/utils';
 
   export let totalPages: number;
-
   let searchParams: string;
   $: {
-    const allParams = Object.fromEntries($page.url.searchParams);
-    if (allParams.page) {
-      delete allParams.page;
-    }
-    const allParamsString = new URLSearchParams(allParams).toString();
+    const allParamsString = getParamsString($page.url.searchParams, ['page']);
     if (allParamsString) {
       searchParams = `?${allParamsString}&`;
     } else {
@@ -29,7 +25,7 @@
 </script>
 
 {#if totalPages > 1}
-  <div class="flex justify-end">
+  <div class="flex justify-end" {...$$restProps}>
     <nav aria-label="Page navigation example">
       <ul class="inline-flex h-10 -space-x-px text-base">
         <li>

@@ -4,6 +4,7 @@ import { categories } from '$lib/server/database/schema';
 
 type Category = typeof categories;
 type Create = InferModel<Category, 'insert'>;
+export type Select = InferModel<Category, 'select'>;
 
 export class CategoryRepository extends BaseRepository<Category> {
   constructor() {

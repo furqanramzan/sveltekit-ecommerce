@@ -1,4 +1,4 @@
-import { desc, eq, sql } from 'drizzle-orm';
+import { and, desc, eq, like, sql } from 'drizzle-orm';
 import type { InferModel, SQL } from 'drizzle-orm';
 import { BaseRepository, type GetMany } from './base-repository';
 import { products } from '$lib/server/database/schema';
@@ -6,6 +6,7 @@ import { products } from '$lib/server/database/schema';
 type Product = typeof products;
 export type Create = InferModel<Product, 'insert'>;
 interface GetManyWithFilter {
+  name?: string;
   category?: number;
 }
 
@@ -26,9 +27,13 @@ export class ProductRepository extends BaseRepository<Product> {
     return { items, total };
   }
 
-  async getManyWithFilter({ limit, offset }: GetMany, { category }: GetManyWithFilter) {
+  async getManyWithFilter({ limit, offset }: GetMany, { category, name }: GetManyWithFilter) {
     let where: SQL<unknown> | undefined;
-    if (category) {
+    if (name && category) {
+      where = and(like(this.table.name, `%${name}%`), eq(this.table.categoryId, category));
+    } else if (name) {
+      where = like(this.table.name, `%${name}%`);
+    } else if (category) {
       where = eq(this.table.categoryId, category);
     }
 

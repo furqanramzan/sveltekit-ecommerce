@@ -4,6 +4,7 @@ import { useRepository } from '$lib/server/repositories';
 import { formatListParams, formatListResponse } from '$lib/utils/list';
 
 const filterSchema = z.object({
+  name: z.string().optional(),
   category: z.coerce.number().optional(),
 });
 
