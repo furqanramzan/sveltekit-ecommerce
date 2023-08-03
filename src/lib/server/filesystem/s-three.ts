@@ -39,6 +39,7 @@ export async function store(file: File | Sharp, name: string) {
       Bucket,
       Key: `${directory}/${name}`,
       Body: body,
+      CacheControl: 'max-age=31536000',
     },
   });
 
