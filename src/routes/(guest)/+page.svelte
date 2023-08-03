@@ -39,6 +39,8 @@
                 <a href="/">
                   <img
                     loading="lazy"
+                    width="320"
+                    height="288"
                     class="p-8 rounded-t-lg"
                     src={product.image}
                     alt={product.name}
