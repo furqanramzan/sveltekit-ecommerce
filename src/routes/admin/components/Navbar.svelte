@@ -1,6 +1,7 @@
 <script lang="ts">
   import { DarkMode } from 'flowbite-svelte';
   import { PUBLIC_APP_NAME } from '$env/static/public';
+  import { logo } from '$lib/images';
 </script>
 
 <nav
@@ -33,10 +34,7 @@
           </svg>
         </button>
         <a href="/" class="ml-2 flex md:mr-24">
-          <span
-            class="self-center whitespace-nowrap text-xl font-semibold dark:text-white sm:text-2xl"
-            >{PUBLIC_APP_NAME}</span
-          >
+          <img src={logo} alt={PUBLIC_APP_NAME} />
         </a>
       </div>
       <div class="flex items-center">

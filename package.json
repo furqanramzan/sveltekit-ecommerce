@@ -56,6 +56,7 @@
     "tslib": "^2.6.1",
     "typescript": "^5.1.6",
     "vite": "^4.4.7",
+    "vite-imagetools": "^5.0.7",
     "zod": "^3.21.4"
   },
   "nx": {
