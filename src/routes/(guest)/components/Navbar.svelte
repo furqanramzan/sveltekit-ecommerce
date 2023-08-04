@@ -22,9 +22,9 @@
         </li>
         <li>
           <a
-            href="/"
+            href="/cart"
             class="block text-gray-900 hover:text-primary-700 dark:hover:text-primary-500 dark:text-white"
-            >About</a
+            >Cart</a
           >
         </li>
         <li>

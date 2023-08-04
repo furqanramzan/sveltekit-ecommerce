@@ -52,6 +52,10 @@ export class ProductRepository extends BaseRepository<Product> {
     return { items, total: data[0].count };
   }
 
+  getAllById(ids: number[]) {
+    return this.getAllByInColumn(this.table.id, ids);
+  }
+
   async create(values: Create) {
     const result = await this.drizzle.insert(this.table).values(values);
 

@@ -6,6 +6,7 @@ import {
   desc,
   eq,
   gte,
+  inArray,
   ne,
   sql,
 } from 'drizzle-orm';
@@ -132,6 +133,15 @@ export class BaseRepository<TBaseTable extends BaseTable> {
       .offset(0);
 
     return !!data[0];
+  }
+
+  async getAllByInColumn<TColumn extends AnyColumn>(
+    column: TColumn,
+    value: GetColumnData<TColumn, 'raw'>[],
+  ) {
+    return value.length > 0
+      ? this.drizzle.select().from(this.table).where(inArray(column, value))
+      : [];
   }
 
   createResponse(result: MySqlRawQueryResult) {
