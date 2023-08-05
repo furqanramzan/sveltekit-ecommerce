@@ -36,7 +36,7 @@
               class="w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
             >
               <div class="w-full text-center">
-                <a href="/">
+                <a href="/product/{product.id}">
                   <img
                     loading="lazy"
                     width="320"
@@ -48,7 +48,7 @@
                 </a>
               </div>
               <div class="px-5 pb-5 flex flex-col gap-4">
-                <a href="/">
+                <a href="/product/{product.id}">
                   <h5
                     class="text-lg font-semibold tracking-tight text-gray-900 dark:text-white"
                   >

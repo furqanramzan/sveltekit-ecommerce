@@ -36,3 +36,10 @@ export const upsertCategorySchema = z.object({
   name: z.string().min(1).max(256).trim(),
   image: z.custom(),
 });
+
+export const addToCartSchema = z.object({
+  quantity: z.coerce
+    .number()
+    .positive()
+    .default('' as unknown as number),
+});

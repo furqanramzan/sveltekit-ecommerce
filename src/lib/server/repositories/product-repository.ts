@@ -74,6 +74,13 @@ export class ProductRepository extends BaseRepository<Product> {
     return this.getAllByInColumn(this.table.id, ids);
   }
 
+  getOneForDetail(id: number) {
+    return this.drizzle.query.products.findFirst({
+      with: { category: true },
+      where: (table, { eq }) => eq(table.id, id),
+    });
+  }
+
   async create(values: Create) {
     const result = await this.drizzle.insert(this.table).values(values);
 

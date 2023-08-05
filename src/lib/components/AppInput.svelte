@@ -1,9 +1,13 @@
 <script lang="ts" context="module">
-  import type { HTMLInputTypeAttribute } from 'svelte/elements';
+  import type { HTMLAttributes, HTMLInputTypeAttribute } from 'svelte/elements';
 
   export interface InputItem {
     name: string;
-    label?: string;
+    /**
+     * @default true
+     */
+    showLabel?: boolean;
+    label?: string | false;
     /**
      * @default text
      */
@@ -30,6 +34,7 @@
     multiple?: boolean;
     value?: string | number;
     errors?: string[];
+    class?: HTMLAttributes<HTMLInputElement>['class'];
   }
 </script>
 
@@ -44,6 +49,7 @@
 
   $: name = input.name;
   $: min = input.min || 0;
+  $: overrideClass = input.class || '';
   $: multiple = input.multiple || false;
   $: id = input.id || name;
   $: type = input.type || 'text';
@@ -58,11 +64,13 @@
   }
 </script>
 
-<label
-  for={id}
-  class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
-  >{label}</label
->
+{#if input.showLabel}
+  <label
+    for={id}
+    class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
+    >{label}</label
+  >
+{/if}
 <input
   {id}
   {min}
@@ -75,7 +83,7 @@
   use:typeAction
   class="block w-full rounded-lg border p-2.5 text-sm {hasError
     ? 'border-red-500 bg-red-50 text-red-900 placeholder-red-700 focus:border-red-500 focus:ring-red-500 dark:border-red-500 dark:bg-gray-700 dark:text-red-500 dark:placeholder-red-500'
-    : 'focus:border-primary-600 focus:ring-primary-600 dark:focus:border-primary-500 dark:focus:ring-primary-500 border-gray-300 bg-gray-50 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400'}"
+    : 'focus:border-primary-600 focus:ring-primary-600 dark:focus:border-primary-500 dark:focus:ring-primary-500 border-gray-300 bg-gray-50 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400'} {overrideClass}"
 />
 {#if hasError}
   <ul class="mt-2 text-sm text-red-600 dark:text-red-500">
