@@ -23,19 +23,24 @@ const resizes: Record<'product' | 'category', ResizeOptions> = {
   },
 };
 
-export async function uploadSharp<T extends keyof typeof resizes>(file: Sharp, resize?: T) {
+export async function uploadSharp<T extends keyof typeof resizes>(
+  file: Sharp,
+  resize?: T,
+) {
   if (resize) {
     file.resize(resizes[resize]);
   }
-  const link = await filesystem.store(file.webp(), `${crypto.randomUUID()}.webp`);
+  const link = await filesystem.store(
+    file.webp(),
+    `${crypto.randomUUID()}.webp`,
+  );
   return link || '';
 }
 
-export async function uploadFile<T extends string, TType extends 'one' | 'many'>(
-  name: T,
-  formData: FormData,
-  type: TType,
-) {
+export async function uploadFile<
+  T extends string,
+  TType extends 'one' | 'many',
+>(name: T, formData: FormData, type: TType) {
   const files = getFiles(formData, name);
 
   if (files.length === 0) {
@@ -67,7 +72,9 @@ export function deleteFile(key?: string | null) {
 }
 
 function getFiles(formData: FormData, name: string) {
-  return formData.getAll(name).filter((x) => x instanceof File && x.size > 0) as File[];
+  return formData
+    .getAll(name)
+    .filter((x) => x instanceof File && x.size > 0) as File[];
 }
 
 async function optimizeFile(file: File) {

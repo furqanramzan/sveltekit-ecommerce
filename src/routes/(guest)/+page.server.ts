@@ -9,7 +9,9 @@ const filterSchema = z.object({
 });
 
 export const load = (async (event) => {
-  const filters = filterSchema.parse(Object.fromEntries(event.url.searchParams));
+  const filters = filterSchema.parse(
+    Object.fromEntries(event.url.searchParams),
+  );
 
   const getCategories = async () => {
     const repository = useRepository('category');

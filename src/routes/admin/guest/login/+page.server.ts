@@ -25,7 +25,10 @@ export const actions = {
 
     if (loginData) {
       const { adminPassword, ...jwtData } = loginData;
-      const passwordMatched = await hash.compare(password, adminPassword.password);
+      const passwordMatched = await hash.compare(
+        password,
+        adminPassword.password,
+      );
       if (passwordMatched) {
         const token = jwt.encode(jwtData);
         setToken(event, token);

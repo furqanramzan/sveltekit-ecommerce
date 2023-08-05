@@ -13,7 +13,9 @@
 
   export let link: LinkItem;
 
-  $: isCurrentLinkActive = $page.url.pathname.startsWith(link.active || link.href);
+  $: isCurrentLinkActive = $page.url.pathname.startsWith(
+    link.active || link.href,
+  );
 </script>
 
 <li class:active={isCurrentLinkActive}>

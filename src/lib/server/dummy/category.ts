@@ -20,7 +20,9 @@ const categoriesData = [
 export async function categories() {
   const data = structuredClone(categoriesData);
   for await (const category of data) {
-    const imagePath = getFileInCurrentDirectory(`category/${category.image}.svg`);
+    const imagePath = getFileInCurrentDirectory(
+      `category/${category.image}.svg`,
+    );
     const image = sharp(imagePath);
     category.image = await uploadSharp(image, 'category');
   }

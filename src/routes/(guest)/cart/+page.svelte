@@ -12,12 +12,20 @@
   {#if products.length === 0}
     <div class="w-full flex flex-col items-center justify-center gap-10">
       <img loading="lazy" src={noProduct} alt="No Products Found" />
-      <h3 class="text-xl font-bold text-gray-900 dark:text-white">No product in cart</h3>
+      <h3 class="text-xl font-bold text-gray-900 dark:text-white">
+        No product in cart
+      </h3>
     </div>
   {:else}
-    <div class="max-w-screen-xl mx-auto flex flex-col items-center lg:flex-row gap-5 xl:px-0 px-5">
-      <div class="w-full flex flex-grow relative overflow-x-auto shadow-md sm:rounded-lg">
-        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+    <div
+      class="max-w-screen-xl mx-auto flex flex-col items-center lg:flex-row gap-5 xl:px-0 px-5"
+    >
+      <div
+        class="w-full flex flex-grow relative overflow-x-auto shadow-md sm:rounded-lg"
+      >
+        <table
+          class="w-full text-sm text-left text-gray-500 dark:text-gray-400"
+        >
           <thead
             class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
           >
@@ -39,7 +47,9 @@
                 <td class="w-24 p-4">
                   <img src={product.image} alt={product.name} />
                 </td>
-                <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
+                <td
+                  class="px-6 py-4 font-semibold text-gray-900 dark:text-white"
+                >
                   {product.name}
                 </td>
                 <td class="px-6 py-4">
@@ -53,11 +63,15 @@
                     />
                   </div>
                 </td>
-                <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
+                <td
+                  class="px-6 py-4 font-semibold text-gray-900 dark:text-white"
+                >
                   {currency}{product.price}
                 </td>
                 <td class="px-6 py-4">
-                  <a href="/" class="font-medium text-red-600 dark:text-red-500 hover:underline"
+                  <a
+                    href="/"
+                    class="font-medium text-red-600 dark:text-red-500 hover:underline"
                     >Remove</a
                   >
                 </td>
@@ -69,7 +83,9 @@
       <div
         class="w-full flex flex-col items-center lg:max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700 self-start gap-y-5"
       >
-        <h5 class="mb-0 text-xl font-medium text-gray-500 dark:text-gray-400">Order total</h5>
+        <h5 class="mb-0 text-xl font-medium text-gray-500 dark:text-gray-400">
+          Order total
+        </h5>
         <div class="flex items-baseline text-gray-900 dark:text-white">
           <span class="text-3xl font-semibold">{currency}</span>
           <span class="text-5xl font-extrabold tracking-tight">49</span>

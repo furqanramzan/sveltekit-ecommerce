@@ -37,7 +37,9 @@
 
   <Sidebar {links} />
 
-  <div class="flex min-h-screen flex-col gap-y-5 bg-gray-100 p-6 dark:bg-gray-900 md:ml-64">
+  <div
+    class="flex min-h-screen flex-col gap-y-5 bg-gray-100 p-6 dark:bg-gray-900 md:ml-64"
+  >
     <section class="mt-16 rounded-lg bg-white p-8 shadow-lg dark:bg-gray-800">
       <slot />
     </section>

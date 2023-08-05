@@ -10,7 +10,11 @@ import {
   ne,
   sql,
 } from 'drizzle-orm';
-import type { MySqlSerial, MySqlTableWithColumns, MySqlTimestamp } from 'drizzle-orm/mysql-core';
+import type {
+  MySqlSerial,
+  MySqlTableWithColumns,
+  MySqlTimestamp,
+} from 'drizzle-orm/mysql-core';
 import type { MySqlRawQueryResult } from 'drizzle-orm/mysql2';
 import { drizzle } from '$lib/server/database';
 
@@ -93,13 +97,20 @@ export class BaseRepository<TBaseTable extends BaseTable> {
     if (id) {
       where = eq(this.table.id, id);
     }
-    const data = await this.drizzle.select().from(this.table).limit(1).offset(0).where(where);
+    const data = await this.drizzle
+      .select()
+      .from(this.table)
+      .limit(1)
+      .offset(0)
+      .where(where);
 
     return data[0] ? data[0] : undefined;
   }
 
   async destroy(id: number) {
-    const result = await this.drizzle.delete(this.table).where(eq(this.table.id, id));
+    const result = await this.drizzle
+      .delete(this.table)
+      .where(eq(this.table.id, id));
 
     return this.destroyResponse(result, id);
   }
@@ -108,7 +119,10 @@ export class BaseRepository<TBaseTable extends BaseTable> {
     column: TColumn,
     value: GetColumnData<TColumn, 'raw'>,
   ) {
-    const data = await this.drizzle.select().from(this.table).where(eq(column, value));
+    const data = await this.drizzle
+      .select()
+      .from(this.table)
+      .where(eq(column, value));
 
     return data[0] ? data[0] : undefined;
   }

@@ -51,7 +51,9 @@
         {/each}
         <li>
           <a
-            href="{pathname}page={currentPage === totalPages ? totalPages : currentPage + 1}"
+            href="{pathname}page={currentPage === totalPages
+              ? totalPages
+              : currentPage + 1}"
             class="flex h-10 items-center justify-center rounded-r-lg border border-gray-300 bg-white px-4 leading-tight text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
           >
             <Icon icon="mdi:arrow-right" />

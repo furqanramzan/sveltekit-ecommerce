@@ -16,8 +16,10 @@
         class="flex font-medium rounded-lg space-x-8 bg-white dark:bg-gray-800 dark:border-gray-700"
       >
         <li>
-          <a href="/" class="block text-primary-700 dark:text-primary-500" aria-current="page"
-            >Home</a
+          <a
+            href="/"
+            class="block text-primary-700 dark:text-primary-500"
+            aria-current="page">Home</a
           >
         </li>
         <li>
@@ -36,11 +38,15 @@
     </div>
 
     <form>
-      <label for="search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
+      <label
+        for="search"
+        class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
         >Search</label
       >
       <div class="relative">
-        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+        <div
+          class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
+        >
           <svg
             class="w-4 h-4 text-gray-500 dark:text-gray-400"
             aria-hidden="true"

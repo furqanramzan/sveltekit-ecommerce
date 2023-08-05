@@ -49,7 +49,9 @@
               </div>
               <div class="px-5 pb-5 flex flex-col gap-4">
                 <a href="/">
-                  <h5 class="text-lg font-semibold tracking-tight text-gray-900 dark:text-white">
+                  <h5
+                    class="text-lg font-semibold tracking-tight text-gray-900 dark:text-white"
+                  >
                     {product.name}
                   </h5>
                 </a>
@@ -67,7 +69,10 @@
             </div>
           {/each}
         </div>
-        <AppPagination totalPages={products.totalPages} class="flex justify-center" />
+        <AppPagination
+          totalPages={products.totalPages}
+          class="flex justify-center"
+        />
       </div>
     {/if}
   </div>

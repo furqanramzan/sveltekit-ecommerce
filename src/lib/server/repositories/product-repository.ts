@@ -19,7 +19,13 @@ export class ProductRepository extends BaseRepository<Product> {
     const items = await this.drizzle.query.products.findMany({
       limit,
       offset,
-      columns: { id: true, name: true, quantity: true, price: true, image: true },
+      columns: {
+        id: true,
+        name: true,
+        quantity: true,
+        price: true,
+        image: true,
+      },
       with: { category: { columns: { id: true, name: true } } },
       orderBy: desc(this.table.createdAt),
     });
@@ -27,10 +33,16 @@ export class ProductRepository extends BaseRepository<Product> {
     return { items, total };
   }
 
-  async getManyWithFilter({ limit, offset }: GetMany, { category, name }: GetManyWithFilter) {
+  async getManyWithFilter(
+    { limit, offset }: GetMany,
+    { category, name }: GetManyWithFilter,
+  ) {
     let where: SQL<unknown> | undefined;
     if (name && category) {
-      where = and(like(this.table.name, `%${name}%`), eq(this.table.categoryId, category));
+      where = and(
+        like(this.table.name, `%${name}%`),
+        eq(this.table.categoryId, category),
+      );
     } else if (name) {
       where = like(this.table.name, `%${name}%`);
     } else if (category) {
@@ -41,7 +53,13 @@ export class ProductRepository extends BaseRepository<Product> {
       limit,
       offset,
       where,
-      columns: { id: true, name: true, quantity: true, price: true, image: true },
+      columns: {
+        id: true,
+        name: true,
+        quantity: true,
+        price: true,
+        image: true,
+      },
       orderBy: desc(this.table.createdAt),
     });
     const data = await this.drizzle
@@ -69,7 +87,10 @@ export class ProductRepository extends BaseRepository<Product> {
   }
 
   async update(values: Create, id: number) {
-    const result = await this.drizzle.update(this.table).set(values).where(eq(this.table.id, id));
+    const result = await this.drizzle
+      .update(this.table)
+      .set(values)
+      .where(eq(this.table.id, id));
 
     return this.updateResponse(result, id);
   }

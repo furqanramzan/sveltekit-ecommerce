@@ -4,7 +4,10 @@
   import LightButton from '$lib/components/buttons/LightButton.svelte';
   import SubmitButton from '$lib/components/buttons/SubmitButton.svelte';
 
-  type Enctype = 'application/x-www-form-urlencoded' | 'multipart/form-data' | 'text/plain';
+  type Enctype =
+    | 'application/x-www-form-urlencoded'
+    | 'multipart/form-data'
+    | 'text/plain';
   export let enctype: Enctype = 'text/plain';
   export let enhance: ReturnType<typeof superForm>['enhance'];
   export let submitting: boolean;

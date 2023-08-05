@@ -93,7 +93,8 @@ const productsData = [
     },
     {
       name: 'Wooden Dining Table 2',
-      description: 'Another sturdy wooden dining table for your family gatherings.',
+      description:
+        'Another sturdy wooden dining table for your family gatherings.',
       price: 499,
       quantity: 10,
       image: 'table-2',
@@ -167,7 +168,8 @@ const productsData = [
     },
     {
       name: 'King Size Double Bed 2',
-      description: "Another luxurious king size double bed for a good night's sleep.",
+      description:
+        "Another luxurious king size double bed for a good night's sleep.",
       price: 999,
       quantity: 10,
       image: 'double-bed-2',
@@ -350,7 +352,8 @@ const productsData = [
     },
     {
       name: 'Dressing Table with Drawers',
-      description: 'A dressing table with drawers for organizing your beauty essentials.',
+      description:
+        'A dressing table with drawers for organizing your beauty essentials.',
       price: 599,
       quantity: 10,
       image: 'dressing-table-7',
@@ -396,7 +399,8 @@ const productsData = [
     },
     {
       name: 'Mesh Back Office Chair',
-      description: 'A breathable mesh back office chair for long hours at the desk.',
+      description:
+        'A breathable mesh back office chair for long hours at the desk.',
       price: 299,
       quantity: 10,
       image: 'offcie-chair-3',
@@ -531,7 +535,9 @@ export async function products(categories: { id: number }[]) {
   const data: Create[] = [];
   for await (const [categoryIndex, category] of productsData.entries()) {
     for await (const product of category) {
-      const imagePath = getFileInCurrentDirectory(`product/${product.image}.png`);
+      const imagePath = getFileInCurrentDirectory(
+        `product/${product.image}.png`,
+      );
       const image = await uploadSharp(sharp(imagePath), 'product');
 
       const categoryId = categories[categoryIndex].id;

@@ -12,7 +12,11 @@
       categoryParam = { category: category.id.toString() };
     }
 
-    const allParams = getParamsString($page.url.searchParams, ['page', 'category'], categoryParam);
+    const allParams = getParamsString(
+      $page.url.searchParams,
+      ['page', 'category'],
+      categoryParam,
+    );
     href = allParams ? `?${allParams}` : $page.url.pathname;
   }
 </script>

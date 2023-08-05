@@ -5,9 +5,18 @@ import { createConnection } from 'mysql2';
 import { drizzle } from 'drizzle-orm/mysql2';
 import { migrate } from 'drizzle-orm/mysql2/migrator';
 
-export async function mysqlConnection<T extends Record<string, unknown>>(schema?: T) {
-  const { host, port, user, password, database, rejectUnauthorized, automaticMigration } =
-    getConstants();
+export async function mysqlConnection<T extends Record<string, unknown>>(
+  schema?: T,
+) {
+  const {
+    host,
+    port,
+    user,
+    password,
+    database,
+    rejectUnauthorized,
+    automaticMigration,
+  } = getConstants();
 
   const connection = createConnection({
     host,

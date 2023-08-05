@@ -24,7 +24,10 @@ export class CategoryRepository extends BaseRepository<Category> {
   }
 
   async update(values: Create, id: number) {
-    const result = await this.drizzle.update(this.table).set(values).where(eq(this.table.id, id));
+    const result = await this.drizzle
+      .update(this.table)
+      .set(values)
+      .where(eq(this.table.id, id));
 
     return this.updateResponse(result, id);
   }

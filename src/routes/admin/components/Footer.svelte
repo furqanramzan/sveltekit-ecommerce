@@ -10,7 +10,8 @@
 >
   <p class="mb-4 text-center text-sm text-gray-500 dark:text-gray-400 sm:mb-0">
     &copy; {currentYear}
-    <a href="/" class="hover:underline" target="_blank">{PUBLIC_APP_NAME}</a>. All rights reserved.
+    <a href="/" class="hover:underline" target="_blank">{PUBLIC_APP_NAME}</a>.
+    All rights reserved.
   </p>
   <AppSocialLinks />
 </footer>

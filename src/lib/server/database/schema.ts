@@ -45,7 +45,9 @@ export const categories = mysqlTable('categories', {
 
 export const products = mysqlTable('products', {
   id: serial('id').primaryKey(),
-  categoryId: bigint('category_id', { mode: 'number' }).references(() => categories.id),
+  categoryId: bigint('category_id', { mode: 'number' }).references(
+    () => categories.id,
+  ),
   name: varchar('name', { length: 256 }).notNull(),
   description: text('description').notNull(),
   price: float('price').notNull(),

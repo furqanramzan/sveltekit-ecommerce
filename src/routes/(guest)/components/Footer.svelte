@@ -9,8 +9,8 @@
       <AppLogo />
     </div>
     <p class="my-6 text-gray-500 dark:text-gray-400">
-      A powerful, open-source E-commerce project for seamless online shopping experiences, powered
-      by SvelteKit.
+      A powerful, open-source E-commerce project for seamless online shopping
+      experiences, powered by SvelteKit.
     </p>
     <AppSocialLinks />
   </div>

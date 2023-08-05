@@ -18,6 +18,8 @@ const repositories = {
 type Repositories = typeof repositories;
 type RepositoryKey = keyof Repositories;
 
-export function useRepository<T extends RepositoryKey>(key: T): Repositories[T] {
+export function useRepository<T extends RepositoryKey>(
+  key: T,
+): Repositories[T] {
   return repositories[key];
 }

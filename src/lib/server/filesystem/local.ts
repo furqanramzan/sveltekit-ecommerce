@@ -9,7 +9,10 @@ export async function store(file: File | Sharp, name: string) {
 
   if (file instanceof File) {
     const buffer = await file.arrayBuffer();
-    writePromise = await promise(() => writeFile(filePath, new Uint8Array(buffer)), true);
+    writePromise = await promise(
+      () => writeFile(filePath, new Uint8Array(buffer)),
+      true,
+    );
   } else {
     writePromise = await promise(() => file.toFile(filePath), true);
   }
