@@ -157,9 +157,7 @@ export class BaseRepository<TBaseTable extends BaseTable> {
     column: TColumn,
     value: GetColumnData<TColumn, 'raw'>[],
   ) {
-    return value.length > 0
-      ? this.drizzle.select().from(this.table).where(inArray(column, value))
-      : [];
+    return this.drizzle.select().from(this.table).where(inArray(column, value));
   }
 
   createResponse(result: MySqlRawQueryResult) {

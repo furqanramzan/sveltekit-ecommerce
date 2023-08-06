@@ -1,11 +1,24 @@
 <script lang="ts">
+  import { superForm } from 'sveltekit-superforms/client';
   import type { PageServerData } from './$types';
   import { currency } from '$lib/constants';
   import { noProduct } from '$lib/images';
+  import { updateCartSchema } from '$lib/validation';
+  import SubmitButton from '$lib/components/buttons/SubmitButton.svelte';
 
   export let data: PageServerData;
 
+  const { form, submitting, enhance } = superForm(data.form, {
+    validators: updateCartSchema,
+    dataType: 'json',
+  });
+
   $: products = data.products;
+  $: total = products.reduce(
+    (total, product, index) =>
+      total + product.price * $form.products[index].quantity,
+    0,
+  );
 </script>
 
 <div class="w-full py-24">
@@ -17,11 +30,13 @@
       </h3>
     </div>
   {:else}
-    <div
-      class="max-w-screen-xl mx-auto flex flex-col items-center lg:flex-row gap-5 xl:px-0 px-5"
+    <form
+      use:enhance
+      method="post"
+      class="max-w-screen-xl mx-auto flex flex-col lg:flex-row gap-5 xl:px-0 px-5"
     >
       <div
-        class="w-full flex flex-grow relative overflow-x-auto shadow-md sm:rounded-lg"
+        class="w-full flex self-start relative overflow-x-auto shadow-md sm:rounded-lg"
       >
         <table
           class="w-full text-sm text-left text-gray-500 dark:text-gray-400"
@@ -40,25 +55,35 @@
             </tr>
           </thead>
           <tbody>
-            {#each products as product}
+            {#each products as product, index}
               <tr
                 class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
               >
                 <td class="w-24 p-4">
-                  <img src={product.image} alt={product.name} />
+                  <a href="/product/{product.id}">
+                    <img src={product.image} alt={product.name} />
+                  </a>
                 </td>
                 <td
                   class="px-6 py-4 font-semibold text-gray-900 dark:text-white"
                 >
-                  {product.name}
+                  <a href="/product/{product.id}">
+                    {product.name}
+                  </a>
                 </td>
                 <td class="px-6 py-4">
                   <div>
                     <input
+                      type="hidden"
+                      name=""
+                      bind:value={$form.products[index].id}
+                    />
+                    <input
+                      bind:value={$form.products[index].quantity}
                       type="number"
-                      id="first_product"
                       class="bg-gray-50 w-14 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                       placeholder="1"
+                      max={product.quantity}
                       required
                     />
                   </div>
@@ -69,11 +94,17 @@
                   {currency}{product.price}
                 </td>
                 <td class="px-6 py-4">
-                  <a
-                    href="/"
-                    class="font-medium text-red-600 dark:text-red-500 hover:underline"
-                    >Remove</a
+                  <form
+                    use:enhance
+                    method="post"
+                    action="/product/{product.id}?/remove"
                   >
+                    <button
+                      type="submit"
+                      class="font-medium text-red-600 dark:text-red-500 hover:underline"
+                      >Remove</button
+                    >
+                  </form>
                 </td>
               </tr>
             {/each}
@@ -88,19 +119,15 @@
         </h5>
         <div class="flex items-baseline text-gray-900 dark:text-white">
           <span class="text-3xl font-semibold">{currency}</span>
-          <span class="text-5xl font-extrabold tracking-tight">49</span>
+          <span class="text-5xl font-extrabold tracking-tight">{total}</span>
         </div>
+        <SubmitButton wFull submitting={$submitting}>Update order</SubmitButton>
         <button
           type="button"
           class="text-white bg-secondary-600 hover:bg-secondary-700 focus:ring-4 focus:outline-none focus:ring-secondary-200 dark:focus:ring-secondary-900 font-medium rounded-lg text-sm px-5 py-2.5 inline-flex justify-center w-full text-center"
-          >Update order</button
-        >
-        <button
-          type="button"
-          class="text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-200 dark:focus:ring-primary-900 font-medium rounded-lg text-sm px-5 py-2.5 inline-flex justify-center w-full text-center"
           >Place order</button
         >
       </div>
-    </div>
+    </form>
   {/if}
 </div>

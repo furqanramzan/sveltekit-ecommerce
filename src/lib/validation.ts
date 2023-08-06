@@ -41,5 +41,22 @@ export const addToCartSchema = z.object({
   quantity: z.coerce
     .number()
     .positive()
+    .min(1)
     .default('' as unknown as number),
+});
+
+export const updateCartSchema = z.object({
+  products: z
+    .object({
+      id: z.coerce
+        .number()
+        .positive()
+        .default('' as unknown as number),
+      quantity: z.coerce
+        .number()
+        .positive()
+        .default('' as unknown as number),
+    })
+    .array()
+    .min(1),
 });
