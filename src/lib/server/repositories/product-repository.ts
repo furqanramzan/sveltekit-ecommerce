@@ -1,10 +1,11 @@
-import { and, desc, eq, like, sql } from 'drizzle-orm';
+import { and, desc, eq, gte, like, sql } from 'drizzle-orm';
 import type { InferModel, SQL } from 'drizzle-orm';
 import { BaseRepository, type GetMany } from './base-repository';
 import { products } from '$lib/server/database/schema';
 
 type Product = typeof products;
 export type Create = InferModel<Product, 'insert'>;
+export type Select = InferModel<Product, 'select'>;
 interface GetManyWithFilter {
   name?: string;
   category?: number;
@@ -79,6 +80,12 @@ export class ProductRepository extends BaseRepository<Product> {
       with: { category: true },
       where: (table, { eq }) => eq(table.id, id),
     });
+  }
+
+  isInStock(id: number, quantity: number) {
+    return this.exists(
+      and(gte(this.table.quantity, quantity), eq(this.table.id, id)),
+    );
   }
 
   async create(values: Create) {

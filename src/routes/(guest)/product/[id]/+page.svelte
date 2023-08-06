@@ -1,15 +1,12 @@
 <script lang="ts">
-  import { superForm } from 'sveltekit-superforms/client';
   import type { PageServerData } from './$types';
   import { currency } from '$lib/constants';
-  import AppInput from '$lib/components/AppInput.svelte';
-  import SubmitButton from '$lib/components/buttons/SubmitButton.svelte';
+  import AddToCart from '$guest/components/AddToCart.svelte';
 
   export let data: PageServerData;
 
   $: product = data.product;
-
-  const { form, submitting, enhance } = superForm(data.form);
+  $: isInCart = data.isInCart;
 </script>
 
 <div class="w-full py-24 lg:px-0 px-5">
@@ -53,19 +50,7 @@
         </div>
       </dl>
       <div class="flex items-center space-x-4">
-        <form method="post" class="flex gap-5" use:enhance>
-          <AppInput
-            input={{
-              name: 'quantity',
-              type: 'number',
-              placeholder: '1',
-              showLabel: false,
-              class: '!w-14',
-            }}
-            bind:value={$form.quantity}
-          />
-          <SubmitButton submitting={$submitting}>Add to cart</SubmitButton>
-        </form>
+        <AddToCart {isInCart} {product} />
       </div>
     </div>
   </div>

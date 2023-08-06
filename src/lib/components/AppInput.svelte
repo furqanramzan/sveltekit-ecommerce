@@ -28,6 +28,7 @@
      * @default 0
      */
     min?: number;
+    max?: number;
     /**
      * @default false
      */
@@ -79,6 +80,7 @@
   {placeholder}
   bind:value
   {multiple}
+  max={input.max}
   aria-invalid={hasError}
   use:typeAction
   class="block w-full rounded-lg border p-2.5 text-sm {hasError

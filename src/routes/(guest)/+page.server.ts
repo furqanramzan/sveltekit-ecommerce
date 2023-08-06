@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import type { PageServerLoad } from './$types';
+import { getCart } from './utils';
 import { useRepository } from '$lib/server/repositories';
 import { formatListParams, formatListResponse } from '$lib/utils/list';
 
@@ -25,5 +26,9 @@ export const load = (async (event) => {
     return formatListResponse(items);
   };
 
-  return { categories: getCategories(), products: getProducts() };
+  return {
+    categories: getCategories(),
+    products: getProducts(),
+    cart: getCart(event),
+  };
 }) satisfies PageServerLoad;

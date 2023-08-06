@@ -26,7 +26,7 @@ export class AdminRepository extends BaseRepository<Admin> {
   }
 
   emailExists(email: string, id?: number) {
-    return this.exists(this.table.email, email, id);
+    return this.existsWithEqualConstraint(this.table.email, email, id);
   }
 
   getLoginData(email: string) {

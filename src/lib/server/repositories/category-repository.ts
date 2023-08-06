@@ -40,6 +40,6 @@ export class CategoryRepository extends BaseRepository<Category> {
   }
 
   idExists(id: number) {
-    return this.exists(this.table.id, id);
+    return this.existsWithEqualConstraint(this.table.id, id);
   }
 }

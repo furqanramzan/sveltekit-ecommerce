@@ -127,7 +127,7 @@ export class BaseRepository<TBaseTable extends BaseTable> {
     return data[0] ? data[0] : undefined;
   }
 
-  async exists<TColumn extends AnyColumn>(
+  async existsWithEqualConstraint<TColumn extends AnyColumn>(
     column: TColumn,
     value: GetColumnData<TColumn, 'raw'>,
     id?: number,
@@ -139,6 +139,10 @@ export class BaseRepository<TBaseTable extends BaseTable> {
       where = and(columnConstraint, ne(this.table.id, id));
     }
 
+    return this.exists(where);
+  }
+
+  async exists(where?: SQL<unknown>) {
     const data = await this.drizzle
       .select({ id: this.table.id })
       .from(this.table)

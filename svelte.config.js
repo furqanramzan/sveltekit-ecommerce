@@ -14,6 +14,7 @@ const config = {
     adapter: adapter(),
     alias: {
       $admin: './src/routes/admin',
+      $guest: './src/routes/(guest)',
     },
   },
 };
