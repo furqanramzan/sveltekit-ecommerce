@@ -1,7 +1,9 @@
+/* eslint-disable @typescript-eslint/no-use-before-define */
 import {
   bigint,
   float,
   int,
+  primaryKey,
   serial,
   text,
   timestamp,
@@ -57,6 +59,18 @@ export const products = mysqlTable('products', {
   updatedAt: timestamp('updated_at').notNull().defaultNow(),
 });
 
+export const orders = mysqlTable('orders', {
+  id: serial('id').primaryKey(),
+  name: varchar('name', { length: 256 }).notNull(),
+  email: varchar('email', { length: 256 }).notNull(),
+  phone: varchar('phone', { length: 256 }).notNull(),
+  city: varchar('city', { length: 256 }).notNull(),
+  address: varchar('address', { length: 256 }).notNull(),
+  total: float('total').notNull(),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow(),
+});
+
 export const adminsRelations = relations(admins, ({ one }) => ({
   adminPassword: one(adminPasswords, {
     fields: [admins.id],
@@ -68,9 +82,43 @@ export const categoriesRelations = relations(categories, ({ many }) => ({
   products: many(products),
 }));
 
-export const productsRelations = relations(products, ({ one }) => ({
+export const productsRelations = relations(products, ({ one, many }) => ({
   category: one(categories, {
     fields: [products.categoryId],
     references: [categories.id],
   }),
+  orders: many(productsToOrders),
 }));
+
+export const ordersRelations = relations(orders, ({ many }) => ({
+  products: many(productsToOrders),
+}));
+
+export const productsToOrders = mysqlTable(
+  'products_to_orders',
+  {
+    productId: bigint('product_id', { mode: 'number' })
+      .notNull()
+      .references(() => products.id),
+    orderId: bigint('order_id', { mode: 'number' })
+      .notNull()
+      .references(() => orders.id),
+  },
+  (t) => ({
+    pk: primaryKey(t.productId, t.orderId),
+  }),
+);
+
+export const productsToOrdersRelations = relations(
+  productsToOrders,
+  ({ one }) => ({
+    product: one(products, {
+      fields: [productsToOrders.productId],
+      references: [products.id],
+    }),
+    order: one(orders, {
+      fields: [productsToOrders.orderId],
+      references: [orders.id],
+    }),
+  }),
+);

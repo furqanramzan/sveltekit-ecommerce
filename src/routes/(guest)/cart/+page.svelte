@@ -121,10 +121,10 @@
           <span class="text-5xl font-extrabold tracking-tight">{total}</span>
         </div>
         <SubmitButton wFull submitting={$submitting}>Update order</SubmitButton>
-        <button
-          type="button"
+        <a
+          href="/checkout"
           class="text-white bg-secondary-600 hover:bg-secondary-700 focus:ring-4 focus:outline-none focus:ring-secondary-200 dark:focus:ring-secondary-900 font-medium rounded-lg text-sm px-5 py-2.5 inline-flex justify-center w-full text-center"
-          >Place order</button
+          >Place order</a
         >
       </div>
     </form>

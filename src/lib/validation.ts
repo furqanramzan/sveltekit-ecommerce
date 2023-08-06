@@ -59,3 +59,12 @@ export const updateCartSchema = z.object({
     .array()
     .min(1),
 });
+
+export const createOrderSchema = z.object({
+  id: z.coerce.number().optional(),
+  name: z.string().min(1).max(256).trim(),
+  email: z.string().email().min(1).max(256).trim(),
+  phone: z.string().min(1).max(256).trim(),
+  city: z.string().min(1).max(256).trim(),
+  address: z.string().min(1).max(256).trim(),
+});

@@ -55,6 +55,7 @@
   $: id = input.id || name;
   $: type = input.type || 'text';
   $: label = input.label || titleCase(name);
+  $: showLabel = input.showLabel || true;
   $: required = input.required || true;
   $: placeholder = input.placeholder || `Type ${noCase(name)} here`;
   $: errors = input.errors || [];
@@ -65,7 +66,7 @@
   }
 </script>
 
-{#if input.showLabel}
+{#if showLabel}
   <label
     for={id}
     class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"

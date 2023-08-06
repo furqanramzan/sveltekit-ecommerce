@@ -1,7 +1,7 @@
 {
   "version": "5",
   "dialect": "mysql",
-  "id": "9154a1cc-1d00-40be-ab70-f1b8fbf10c28",
+  "id": "ded07f06-13d0-4802-995e-dd3f781aa5bf",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "skec_admin_passwords": {
@@ -27,6 +27,22 @@
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "(now())"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "(now())"
         }
       },
       "indexes": {},
@@ -35,8 +51,12 @@
           "name": "skec_admin_passwords_admin_id_skec_admins_id_fk",
           "tableFrom": "skec_admin_passwords",
           "tableTo": "skec_admins",
-          "columnsFrom": ["admin_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "admin_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -44,7 +64,9 @@
       "compositePrimaryKeys": {
         "skec_admin_passwords_id": {
           "name": "skec_admin_passwords_id",
-          "columns": ["id"]
+          "columns": [
+            "id"
+          ]
         }
       },
       "uniqueConstraints": {}
@@ -93,7 +115,9 @@
       "indexes": {
         "email_idx": {
           "name": "email_idx",
-          "columns": ["email"],
+          "columns": [
+            "email"
+          ],
           "isUnique": true
         }
       },
@@ -101,7 +125,9 @@
       "compositePrimaryKeys": {
         "skec_admins_id": {
           "name": "skec_admins_id",
-          "columns": ["id"]
+          "columns": [
+            "id"
+          ]
         }
       },
       "uniqueConstraints": {}
@@ -152,7 +178,90 @@
       "compositePrimaryKeys": {
         "skec_categories_id": {
           "name": "skec_categories_id",
-          "columns": ["id"]
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {}
+    },
+    "skec_orders": {
+      "name": "skec_orders",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "email": {
+          "name": "email",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "phone": {
+          "name": "phone",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "city": {
+          "name": "city",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "address": {
+          "name": "address",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "total": {
+          "name": "total",
+          "type": "float",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "(now())"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "(now())"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "skec_orders_id": {
+          "name": "skec_orders_id",
+          "columns": [
+            "id"
+          ]
         }
       },
       "uniqueConstraints": {}
@@ -232,8 +341,12 @@
           "name": "skec_products_category_id_skec_categories_id_fk",
           "tableFrom": "skec_products",
           "tableTo": "skec_categories",
-          "columnsFrom": ["category_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "category_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -241,7 +354,67 @@
       "compositePrimaryKeys": {
         "skec_products_id": {
           "name": "skec_products_id",
-          "columns": ["id"]
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {}
+    },
+    "skec_products_to_orders": {
+      "name": "skec_products_to_orders",
+      "columns": {
+        "product_id": {
+          "name": "product_id",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "order_id": {
+          "name": "order_id",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "skec_products_to_orders_product_id_skec_products_id_fk": {
+          "name": "skec_products_to_orders_product_id_skec_products_id_fk",
+          "tableFrom": "skec_products_to_orders",
+          "tableTo": "skec_products",
+          "columnsFrom": [
+            "product_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "skec_products_to_orders_order_id_skec_orders_id_fk": {
+          "name": "skec_products_to_orders_order_id_skec_orders_id_fk",
+          "tableFrom": "skec_products_to_orders",
+          "tableTo": "skec_orders",
+          "columnsFrom": [
+            "order_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "skec_products_to_orders_order_id_product_id": {
+          "name": "skec_products_to_orders_order_id_product_id",
+          "columns": [
+            "order_id",
+            "product_id"
+          ]
         }
       },
       "uniqueConstraints": {}
