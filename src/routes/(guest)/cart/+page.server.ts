@@ -9,19 +9,18 @@ export const load = (async (event) => {
   const cart = getCart(event);
   const repository = useRepository('product');
   let products: Awaited<ReturnType<typeof repository.getAllById>> = [];
+
   if (cart.size > 0) {
     products = await repository.getAllById(Array.from(cart.keys()));
   }
-  // const total = products.reduce((acc, product) => acc + product.price, 0);
 
-  const productIdQuantity = products.map(({ id }) => ({
-    id,
-    quantity: cart.get(id) || 1,
-  }));
-  const form = await superValidate(
-    { products: productIdQuantity },
-    updateCartSchema,
-  );
+  const product: number[] = [];
+  const quantity: number[] = [];
+  products.forEach(({ id }) => {
+    product.push(id);
+    quantity.push(cart.get(id) || 1);
+  });
+  const form = await superValidate({ product, quantity }, updateCartSchema);
 
   return {
     form,
@@ -37,7 +36,9 @@ export const actions = {
     }
 
     const cart = new Map();
-    form.data.products.forEach(({ id, quantity }) => cart.set(id, quantity));
+    form.data.product.forEach((id, index) =>
+      cart.set(id, form.data.quantity[index]),
+    );
     setCart(event, cart);
   },
 } satisfies Actions;
