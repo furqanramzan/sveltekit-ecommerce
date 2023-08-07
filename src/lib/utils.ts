@@ -1,4 +1,5 @@
 import { error } from '@sveltejs/kit';
+import { PUBLIC_APP_NAME } from '$env/static/public';
 
 export function throwIfNotFound<T>(item?: T | null) {
   if (!item) {
@@ -22,4 +23,8 @@ export function getParamsString(
     allParams = { ...allParams, ...addParams };
   }
   return new URLSearchParams(allParams).toString();
+}
+
+export function getTitle(title?: string) {
+  return title ? `${PUBLIC_APP_NAME} | ${title}` : PUBLIC_APP_NAME;
 }

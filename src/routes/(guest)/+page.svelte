@@ -6,6 +6,7 @@
   import AppPagination from '$lib/components/AppPagination.svelte';
   import { currency } from '$lib/constants';
   import { noDataFound } from '$lib/images';
+  import { getTitle } from '$lib/utils';
 
   export let data: PageServerData;
 
@@ -75,3 +76,11 @@
     {/if}
   </div>
 </div>
+
+<svelte:head>
+  <title>{getTitle()}</title>
+  <meta
+    name="description"
+    content="Unleash the shopping bliss! SvelteKit-powered eCommerce for fast, secure, and delightful retail therapy. Discover now!"
+  />
+</svelte:head>

@@ -5,6 +5,7 @@
   import { createOrderSchema } from '$lib/validation';
   import SubmitButton from '$lib/components/buttons/SubmitButton.svelte';
   import AppInput from '$lib/components/AppInput.svelte';
+  import { getTitle } from '$lib/utils';
 
   export let data: PageServerData;
 
@@ -130,3 +131,11 @@
     </div>
   </form>
 </div>
+
+<svelte:head>
+  <title>{getTitle('Checkout')}</title>
+  <meta
+    name="description"
+    content="Seamless checkout at its finest! SvelteKit-powered eCommerce ensures a smooth and secure payment process. Complete your order hassle-free. Shop now!"
+  />
+</svelte:head>

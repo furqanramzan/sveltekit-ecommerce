@@ -5,6 +5,7 @@
   import { noProduct } from '$lib/images';
   import { updateCartSchema } from '$lib/validation';
   import SubmitButton from '$lib/components/buttons/SubmitButton.svelte';
+  import { getTitle } from '$lib/utils';
 
   export let data: PageServerData;
 
@@ -130,3 +131,11 @@
     </form>
   {/if}
 </div>
+
+<svelte:head>
+  <title>{getTitle('Cart')}</title>
+  <meta
+    name="description"
+    content="Your shopping cart, your way! SvelteKit-powered eCommerce makes checkout a breeze. Manage items effortlessly and complete your order in a snap. Shop now!"
+  />
+</svelte:head>

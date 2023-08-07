@@ -51,12 +51,8 @@
           "name": "skec_admin_passwords_admin_id_skec_admins_id_fk",
           "tableFrom": "skec_admin_passwords",
           "tableTo": "skec_admins",
-          "columnsFrom": [
-            "admin_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["admin_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -64,9 +60,7 @@
       "compositePrimaryKeys": {
         "skec_admin_passwords_id": {
           "name": "skec_admin_passwords_id",
-          "columns": [
-            "id"
-          ]
+          "columns": ["id"]
         }
       },
       "uniqueConstraints": {}
@@ -115,9 +109,7 @@
       "indexes": {
         "email_idx": {
           "name": "email_idx",
-          "columns": [
-            "email"
-          ],
+          "columns": ["email"],
           "isUnique": true
         }
       },
@@ -125,9 +117,7 @@
       "compositePrimaryKeys": {
         "skec_admins_id": {
           "name": "skec_admins_id",
-          "columns": [
-            "id"
-          ]
+          "columns": ["id"]
         }
       },
       "uniqueConstraints": {}
@@ -178,9 +168,7 @@
       "compositePrimaryKeys": {
         "skec_categories_id": {
           "name": "skec_categories_id",
-          "columns": [
-            "id"
-          ]
+          "columns": ["id"]
         }
       },
       "uniqueConstraints": {}
@@ -259,9 +247,7 @@
       "compositePrimaryKeys": {
         "skec_orders_id": {
           "name": "skec_orders_id",
-          "columns": [
-            "id"
-          ]
+          "columns": ["id"]
         }
       },
       "uniqueConstraints": {}
@@ -341,12 +327,8 @@
           "name": "skec_products_category_id_skec_categories_id_fk",
           "tableFrom": "skec_products",
           "tableTo": "skec_categories",
-          "columnsFrom": [
-            "category_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["category_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -354,9 +336,7 @@
       "compositePrimaryKeys": {
         "skec_products_id": {
           "name": "skec_products_id",
-          "columns": [
-            "id"
-          ]
+          "columns": ["id"]
         }
       },
       "uniqueConstraints": {}
@@ -385,12 +365,8 @@
           "name": "skec_products_to_orders_product_id_skec_products_id_fk",
           "tableFrom": "skec_products_to_orders",
           "tableTo": "skec_products",
-          "columnsFrom": [
-            "product_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["product_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -398,12 +374,8 @@
           "name": "skec_products_to_orders_order_id_skec_orders_id_fk",
           "tableFrom": "skec_products_to_orders",
           "tableTo": "skec_orders",
-          "columnsFrom": [
-            "order_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["order_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -411,10 +383,7 @@
       "compositePrimaryKeys": {
         "skec_products_to_orders_order_id_product_id": {
           "name": "skec_products_to_orders_order_id_product_id",
-          "columns": [
-            "order_id",
-            "product_id"
-          ]
+          "columns": ["order_id", "product_id"]
         }
       },
       "uniqueConstraints": {}

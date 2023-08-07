@@ -2,6 +2,7 @@
   import type { PageServerData } from './$types';
   import { currency } from '$lib/constants';
   import AddToCart from '$guest/components/AddToCart.svelte';
+  import { getTitle } from '$lib/utils';
 
   export let data: PageServerData;
 
@@ -55,3 +56,8 @@
     </div>
   </div>
 </div>
+
+<svelte:head>
+  <title>{getTitle(product.name)}</title>
+  <meta name="description" content={product.description} />
+</svelte:head>
