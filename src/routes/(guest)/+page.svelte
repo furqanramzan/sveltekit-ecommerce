@@ -1,6 +1,5 @@
 <script lang="ts">
   import '$lib/css/app.css';
-  import type { PageServerData } from './$types';
   import CategoryItem from './components/CategoryItem.svelte';
   import AddToCart from './components/AddToCart.svelte';
   import AppPagination from '$lib/components/AppPagination.svelte';
@@ -8,7 +7,7 @@
   import { noDataFound } from '$lib/images';
   import { getTitle } from '$lib/utils';
 
-  export let data: PageServerData;
+  export let data;
 
   $: categories = data.categories;
   $: products = data.products;

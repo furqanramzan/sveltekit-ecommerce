@@ -1,6 +1,5 @@
 import { superValidate } from 'sveltekit-superforms/server';
 import { type RequestEvent, fail, redirect } from '@sveltejs/kit';
-import type { Actions, PageServerLoad } from './$types';
 import { useRepository } from '$lib/server/repositories';
 import { createOrderSchema } from '$lib/validation';
 import { getCart, removeCart } from '$guest/utils';
@@ -13,7 +12,7 @@ function throwIfCartEmpty(event: RequestEvent) {
   return cart;
 }
 
-export const load = (async (event) => {
+export async function load(event) {
   const cart = throwIfCartEmpty(event);
   const products = await useRepository('product').getAllById(
     Array.from(cart.keys()),
@@ -26,7 +25,7 @@ export const load = (async (event) => {
     cart,
     products,
   };
-}) satisfies PageServerLoad;
+}
 
 export const actions = {
   default: async (event) => {
@@ -59,4 +58,4 @@ export const actions = {
 
     throw redirect(303, '/');
   },
-} satisfies Actions;
+};

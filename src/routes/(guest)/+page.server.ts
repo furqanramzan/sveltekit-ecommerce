@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import type { PageServerLoad } from './$types';
 import { getCart } from './utils';
 import { useRepository } from '$lib/server/repositories';
 import { formatListParams, formatListResponse } from '$lib/utils/list';
@@ -9,7 +8,7 @@ const filterSchema = z.object({
   category: z.coerce.number().optional(),
 });
 
-export const load = (async (event) => {
+export async function load(event) {
   const filters = filterSchema.parse(
     Object.fromEntries(event.url.searchParams),
   );
@@ -31,4 +30,4 @@ export const load = (async (event) => {
     products: getProducts(),
     cart: getCart(event),
   };
-}) satisfies PageServerLoad;
+}

@@ -1,16 +1,15 @@
 import { fail, redirect } from '@sveltejs/kit';
 import { message, superValidate } from 'sveltekit-superforms/server';
-import type { Actions, PageServerLoad } from './$types';
 import { loginSchema } from '$lib/server/validation';
 import { useRepository } from '$lib/server/repositories';
 import { hash } from '$lib/authentication/hash';
 import { jwt } from '$lib/authentication/jwt';
 import { setToken } from '$admin/utils';
 
-export const load = (async () => {
+export async function load() {
   const form = await superValidate(loginSchema);
   return { form };
-}) satisfies PageServerLoad;
+}
 
 export const actions = {
   default: async (event) => {
@@ -39,4 +38,4 @@ export const actions = {
 
     return message(form, 'The email or password does not match');
   },
-} satisfies Actions;
+};

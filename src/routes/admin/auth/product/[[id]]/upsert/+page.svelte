@@ -1,6 +1,5 @@
 <script lang="ts">
   import { superForm } from 'sveltekit-superforms/client';
-  import type { PageServerData } from './$types';
   import AppInput from '$lib/components/AppInput.svelte';
   import { upsertProductSchema } from '$lib/validation';
   import AppTextarea from '$lib/components/AppTextarea.svelte';
@@ -9,7 +8,7 @@
   import { page } from '$app/stores';
   import AppSelect from '$lib/components/AppSelect.svelte';
 
-  export let data: PageServerData;
+  export let data;
 
   const { form, errors, submitting, enhance } = superForm(data.form, {
     validators: upsertProductSchema,

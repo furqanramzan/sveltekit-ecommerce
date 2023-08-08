@@ -1,10 +1,9 @@
 <script lang="ts">
-  import type { PageServerData } from './$types';
   import { currency } from '$lib/constants';
   import AddToCart from '$guest/components/AddToCart.svelte';
   import { getTitle } from '$lib/utils';
 
-  export let data: PageServerData;
+  export let data;
 
   $: product = data.product;
   $: isInCart = data.isInCart;

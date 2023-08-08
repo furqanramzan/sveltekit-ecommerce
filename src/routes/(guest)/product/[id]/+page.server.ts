@@ -1,6 +1,5 @@
 import { superValidate } from 'sveltekit-superforms/client';
 import { fail, redirect } from '@sveltejs/kit';
-import type { Actions, PageServerLoad } from './$types';
 import { addToCartSchema } from '$lib/validation';
 import { useRepository } from '$lib/server/repositories';
 import { throwIfNotFound } from '$lib/utils';
@@ -8,7 +7,7 @@ import { getCart, setCart } from '$guest/utils';
 
 const repository = useRepository('product');
 
-export const load = (async (event) => {
+export async function load(event) {
   const id = Number(event.params.id);
 
   const getForm = () => superValidate({ quantity: 1 }, addToCartSchema);
@@ -28,7 +27,7 @@ export const load = (async (event) => {
     product: getProduct(),
     isInCart: isInCart(),
   };
-}) satisfies PageServerLoad;
+}
 
 export const actions = {
   add: async (event) => {
@@ -54,4 +53,4 @@ export const actions = {
     setCart(event, cart);
     throw redirect(303, '/cart');
   },
-} satisfies Actions;
+};

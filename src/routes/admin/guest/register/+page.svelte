@@ -1,11 +1,10 @@
 <script lang="ts">
   import { superForm } from 'sveltekit-superforms/client';
-  import type { PageServerData } from './$types';
   import AppInput from '$lib/components/AppInput.svelte';
   import SubmitButton from '$lib/components/buttons/SubmitButton.svelte';
   import { upsertAdminSchema } from '$lib/validation';
 
-  export let data: PageServerData;
+  export let data;
 
   const { form, errors, delayed, enhance } = superForm(data.form, {
     validators: upsertAdminSchema,

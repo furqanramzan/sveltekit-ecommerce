@@ -1,4 +1,3 @@
-import type { Actions, PageServerLoad } from './$types';
 import { useRepository } from '$lib/server/repositories';
 import { formatListParams, formatListResponse } from '$lib/utils/list';
 import { throwIfNotFound } from '$lib/utils';
@@ -6,7 +5,7 @@ import { deleteFile } from '$lib/server/filesystem';
 
 const repository = useRepository('category');
 
-export const load = (async (event) => {
+export async function load(event) {
   const params = formatListParams(event);
 
   const items = await repository.getMany(params);
@@ -14,7 +13,7 @@ export const load = (async (event) => {
   const data = formatListResponse(items);
 
   return { data };
-}) satisfies PageServerLoad;
+}
 
 export const actions = {
   destroy: async (event) => {
@@ -25,4 +24,4 @@ export const actions = {
       return throwIfNotFound(await repository.destroy(id));
     }
   },
-} satisfies Actions;
+};

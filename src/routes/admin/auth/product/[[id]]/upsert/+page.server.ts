@@ -1,6 +1,5 @@
 import { fail, redirect } from '@sveltejs/kit';
 import { superValidate } from 'sveltekit-superforms/server';
-import type { Actions, PageServerLoad } from './$types';
 import { upsertProductSchema } from '$lib/server/validation';
 import { useRepository } from '$lib/server/repositories';
 import { throwIfNotFound } from '$lib/utils';
@@ -9,7 +8,7 @@ import { deleteFile, uploadFile } from '$lib/server/filesystem';
 const repository = useRepository('product');
 const categoryRepository = useRepository('category');
 
-export const load = (async (event) => {
+export async function load(event) {
   const categories = await categoryRepository.getManyWithName();
 
   const form = await superValidate(upsertProductSchema);
@@ -21,7 +20,7 @@ export const load = (async (event) => {
   }
 
   return { form, categories };
-}) satisfies PageServerLoad;
+}
 
 export const actions = {
   default: async (event) => {
@@ -56,4 +55,4 @@ export const actions = {
 
     throw redirect(303, '/admin/auth/product/list');
   },
-} satisfies Actions;
+};

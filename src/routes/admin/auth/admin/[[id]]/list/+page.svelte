@@ -1,9 +1,8 @@
 <script lang="ts">
-  import type { PageServerData } from './$types';
   import AppTable from '$lib/components/AppTable.svelte';
   import AppRow from '$lib/components/AppRow.svelte';
 
-  export let data: PageServerData;
+  export let data;
 
   $: items = data.data.items;
   $: totalPages = data.data.totalPages;

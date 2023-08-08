@@ -1,11 +1,10 @@
 import { superValidate } from 'sveltekit-superforms/server';
 import { fail } from '@sveltejs/kit';
-import type { Actions, PageServerLoad } from './$types';
 import { useRepository } from '$lib/server/repositories';
 import { updateCartSchema } from '$lib/validation';
 import { getCart, setCart } from '$guest/utils';
 
-export const load = (async (event) => {
+export async function load(event) {
   const cart = getCart(event);
   const repository = useRepository('product');
   let products: Awaited<ReturnType<typeof repository.getAllById>> = [];
@@ -26,7 +25,7 @@ export const load = (async (event) => {
     form,
     products,
   };
-}) satisfies PageServerLoad;
+}
 
 export const actions = {
   default: async (event) => {
@@ -41,4 +40,4 @@ export const actions = {
     );
     setCart(event, cart);
   },
-} satisfies Actions;
+};

@@ -1,13 +1,12 @@
 <script lang="ts">
   import { superForm } from 'sveltekit-superforms/client';
-  import type { PageServerData } from './$types';
   import { currency } from '$lib/constants';
   import { noProduct } from '$lib/images';
   import { updateCartSchema } from '$lib/validation';
   import SubmitButton from '$lib/components/buttons/SubmitButton.svelte';
   import { getTitle } from '$lib/utils';
 
-  export let data: PageServerData;
+  export let data;
 
   const { form, submitting, enhance } = superForm(data.form, {
     validators: updateCartSchema,

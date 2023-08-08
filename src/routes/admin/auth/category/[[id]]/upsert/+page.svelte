@@ -1,13 +1,12 @@
 <script lang="ts">
   import { superForm } from 'sveltekit-superforms/client';
-  import type { PageServerData } from './$types';
   import AppInput from '$lib/components/AppInput.svelte';
   import { upsertCategorySchema } from '$lib/validation';
   import AppForm from '$lib/components/AppForm.svelte';
   import AppFileInput from '$lib/components/AppFileInput.svelte';
   import { page } from '$app/stores';
 
-  export let data: PageServerData;
+  export let data;
 
   const { form, errors, submitting, enhance } = superForm(data.form, {
     validators: upsertCategorySchema,
