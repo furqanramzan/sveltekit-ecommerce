@@ -50,7 +50,7 @@
         </tr>
       </thead>
       <tbody>
-        <NoDataRow totalItems={items.length} colspan={5} />
+        <NoDataRow totalItems={items.length} colspan={columns.length + 1} />
         <slot />
       </tbody>
       <tfoot

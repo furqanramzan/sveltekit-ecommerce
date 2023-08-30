@@ -1,58 +1,58 @@
-import { z } from 'zod';
+import { coerce, custom, object, string } from 'zod';
 
-export const upsertAdminSchema = z.object({
-  id: z.coerce.number().optional(),
-  name: z.string().min(1).max(256).trim(),
-  email: z.string().email().min(1).max(256).trim(),
-  password: z.string().max(256).trim().optional(),
+export const upsertAdminSchema = object({
+  id: coerce.number().optional(),
+  name: string().min(1).max(256).trim(),
+  email: string().email().min(1).max(256).trim(),
+  password: string().max(256).trim().optional(),
 });
 
-export const loginSchema = z.object({
-  email: z.string().email().min(1).max(256).trim(),
-  password: z.string().max(256).trim(),
+export const loginSchema = object({
+  email: string().email().min(1).max(256).trim(),
+  password: string().max(256).trim(),
 });
 
-export const upsertProductSchema = z.object({
-  id: z.coerce.number().optional(),
-  name: z.string().min(1).max(256).trim(),
-  description: z.string().min(1).max(256).trim(),
-  image: z.custom(),
-  categoryId: z.coerce
+export const upsertProductSchema = object({
+  id: coerce.number().optional(),
+  name: string().min(1).max(256).trim(),
+  description: string().min(1).max(256).trim(),
+  image: custom(),
+  categoryId: coerce
     .number()
     .positive('Required')
     .default('' as unknown as number),
-  price: z.coerce
+  price: coerce
     .number()
     .positive()
     .default('' as unknown as number),
-  quantity: z.coerce
+  quantity: coerce
     .number()
     .positive()
     .default('' as unknown as number),
 });
 
-export const upsertCategorySchema = z.object({
-  id: z.coerce.number().optional(),
-  name: z.string().min(1).max(256).trim(),
-  image: z.custom(),
+export const upsertCategorySchema = object({
+  id: coerce.number().optional(),
+  name: string().min(1).max(256).trim(),
+  image: custom(),
 });
 
-export const addToCartSchema = z.object({
-  quantity: z.coerce
+export const addToCartSchema = object({
+  quantity: coerce
     .number()
     .positive()
     .min(1)
     .default('' as unknown as number),
 });
 
-export const updateCartSchema = z.object({
-  quantity: z.coerce
+export const updateCartSchema = object({
+  quantity: coerce
     .number()
     .positive()
     .default('' as unknown as number)
     .array()
     .min(1),
-  product: z.coerce
+  product: coerce
     .number()
     .positive()
     .default('' as unknown as number)
@@ -60,11 +60,11 @@ export const updateCartSchema = z.object({
     .min(1),
 });
 
-export const createOrderSchema = z.object({
-  id: z.coerce.number().optional(),
-  name: z.string().min(1).max(256).trim(),
-  email: z.string().email().min(1).max(256).trim(),
-  phone: z.string().min(1).max(256).trim(),
-  city: z.string().min(1).max(256).trim(),
-  address: z.string().min(1).max(256).trim(),
+export const createOrderSchema = object({
+  id: coerce.number().optional(),
+  name: string().min(1).max(256).trim(),
+  email: string().email().min(1).max(256).trim(),
+  phone: string().min(1).max(256).trim(),
+  city: string().min(1).max(256).trim(),
+  address: string().min(1).max(256).trim(),
 });
