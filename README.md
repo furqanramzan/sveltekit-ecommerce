@@ -18,6 +18,12 @@ Make sure to install dependencies using:
 pnpm install
 ```
 
+Make a copy of the environment variables file.
+
+```bash
+cp .env.example .env
+```
+
 ## Developing
 
 To start a development server:
