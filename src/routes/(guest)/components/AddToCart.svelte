@@ -5,18 +5,26 @@
 
   export let isInCart: boolean;
   export let product: Pick<Select, 'id'>;
+
+  let submitting = false;
 </script>
 
 <form
   method="post"
   action="/product/{product.id}?/{isInCart ? 'remove' : 'add'}"
   class="flex gap-5"
-  use:enhance
+  use:enhance={() => {
+    submitting = true;
+    return async ({ update }) => {
+      submitting = false;
+      return update();
+    };
+  }}
 >
   {#if !isInCart}
     <input type="hidden" name="quantity" value="1" />
   {/if}
-  <SubmitButton>
+  <SubmitButton {submitting}>
     {#if isInCart}
       Remove from cart
     {:else}
